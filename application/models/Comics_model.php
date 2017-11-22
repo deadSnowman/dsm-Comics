@@ -16,4 +16,15 @@ class Comics_model extends CI_Model {
 
     return $result;
   }
+
+  public function getComicByID($comic_id=0) {
+    if($comic_id != 0) {
+      $sql = "SELECT * FROM comics WHERE comic_id = ?";
+      $dbResult = $this->db->query($sql, array($comic_id));
+      $row = $dbResult->result(); // array
+      return json_encode($row[0]);
+    } else {
+      return "nope";
+    }
+  }
 }

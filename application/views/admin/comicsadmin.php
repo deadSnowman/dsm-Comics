@@ -8,7 +8,9 @@
           <h2>Comics List</h2>
           <?
           foreach ($comics as $c) {
-            echo "<p>" . implode(", ", $c) . "</p>";
+            ?>
+            <p><a href="<? echo $c['comic_id'] ?>" onclick="return false;" class="comic_list_item"><? echo $c['title']; ?> (<? echo $c['genre'] ?>)  ~<? echo $c['artist'] ?></a></p>
+            <?
           }
           ?>
         </div>
@@ -21,7 +23,8 @@
 
           <form class="form-horizontal">
             <div class="form-group">
-              <input class="col-sm-12" type="file" name="file" id="file" required>
+              <label for="inputTitle" class="col-sm-2 control-label">Cover</label>
+              <input class="col-sm-10" type="file" name="inputCover" id="inputCover" required>
             </div>
             <div class="form-group">
               <label for="inputTitle" class="col-sm-2 control-label">Title</label>
@@ -44,7 +47,7 @@
             <div class="form-group">
               <div class="col-sm-12">
                 <label for="inputDescription">Description:</label>
-                <textarea class="form-control" rows="5" id="iputDescription"></textarea>
+                <textarea class="form-control" rows="5" id="inputDescription"></textarea>
               </div>
             </div>
             <div class="form-group pull-right">
@@ -64,4 +67,3 @@
 
 
 </div>
-</body>

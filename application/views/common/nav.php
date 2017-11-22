@@ -11,10 +11,10 @@
         </div>
         <div class="navbar-collapse collapse" id="navbar">
           <ul class="nav navbar-nav">
-            <li class="active">
+            <li <? if($page === "home") echo "class=\"active\""; ?>>
               <a href="<? echo site_url(); ?>">Home</a>
             </li>
-            <li>
+            <li <? if($page === "admin") echo "class=\"active\""; ?>>
               <a href="<? echo site_url('comic/admin'); ?>">Admin</a>
             </li>
           </ul>
