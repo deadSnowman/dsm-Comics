@@ -6,13 +6,20 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <h2>Comics List</h2>
+          <div class="comic_list">
           <?
           foreach ($comics as $c) {
             ?>
-            <p><a href="<? echo $c['comic_id'] ?>" onclick="return false;" class="comic_list_item"><? echo $c['title']; ?> (<? echo $c['genre'] ?>)  ~<? echo $c['artist'] ?></a></p>
+            <p class="comic_list_element_<? echo $c['comic_id']; ?>">
+              <a href="<? echo $c['comic_id']; ?>" onclick="return false;" class="del_comic_list_item">
+                <span class="glyphicon glyphicon-trash"></span>
+              </a>&nbsp;&nbsp;&nbsp;
+              <a href="<? echo $c['comic_id']; ?>" onclick="return false;" class="comic_list_item"><? echo $c['title']; ?> (<? echo $c['genre']; ?>)  ~<? echo $c['artist']; ?></a>
+            </p>
             <?
           }
           ?>
+          </div>
         </div>
       </div>
     </div>
@@ -51,11 +58,11 @@
                 <textarea class="form-control" rows="5" id="inputDescription" placeholder="lorem ipsum and whatnot..."></textarea>
               </div>
             </div>
-            <button type="submit" class="btn btn-default" id="clear_editcomic">Clear</button>
+            <button type="button" class="btn btn-default" id="clear_editcomic">Clear</button>
             <div class="form-group pull-right">
               <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default">Edit Pages</button>
-                <button type="submit" class="btn btn-primary">Update / Add</button>
+                <button type="button" class="btn btn-default">Edit Pages</button>
+                <button type="button" class="btn btn-primary" id="update_add_comic">Update / Add</button>
               </div>
             </div>
             <div class="clearfix"></div>
