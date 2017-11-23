@@ -28,6 +28,8 @@ and restart Apache
 sudo service apache2 restart
 ```
 
+Also, set permissions for uploads directory to 777
+
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 

@@ -1,5 +1,6 @@
 ######## added
 dbdump/dumpdb.sh
+uploads/*
 
 ######## github codeigniter gitignore
 
