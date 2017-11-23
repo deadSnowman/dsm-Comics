@@ -14,26 +14,37 @@ class Comics_model extends CI_Model {
     return $result;
   }
 
-  public function getComicByID($comic_id=0) {
+  public function getPageByID($page_id=0) {
+    if($page_id != 0) {
+      $sql = "SELECT * FROM pages WHERE page_id = ?";
+      $dbResult = $this->db->query($sql, array($page_id));
+      $row = $dbResult->result(); // array
+      return json_encode($row[0]);
+    } else {
+      return false;
+    }
+  }
+
+  /*public function getComicByID($comic_id=0) {
     if($comic_id != 0) {
       $sql = "SELECT * FROM comics WHERE comic_id = ?";
       $dbResult = $this->db->query($sql, array($comic_id));
       $row = $dbResult->result(); // array
       return json_encode($row[0]);
     } else {
-      return "nope";
+      return false;
     }
-  }
+  }*/
 
   // todo: make sure only admin can use this
-  public function updateAddComic($comic_id=0, $title="", $genre="", $artist="", $description="", $cover_image="", $user_id=0) {
+  public function updateAddComic($comic_id=0, $title="", $genre="", $artist="", $description="", $page_id=0, $user_id=0) {
     if($comic_id === 0) {
-      $sql = "INSERT INTO comics (title, genre, artist, description, cover_image) VALUES (?, ?, ?, ?, ?)";
-      $dbResult = $this->db->query($sql, array($title, $genre, $artist, $description, $cover_image));
+      $sql = "INSERT INTO comics (title, genre, artist, description, page_id) VALUES (?, ?, ?, ?, ?)";
+      $dbResult = $this->db->query($sql, array($title, $genre, $artist, $description, $page_id));
       return $this->db->insert_id();
     } else {
-      $sql = "UPDATE comics SET title = ?, genre = ?, artist = ?, description = ?, cover_image = ?  WHERE comic_id = ?";
-      $dbResult = $this->db->query($sql, array($title, $genre, $artist, $description, $cover_image, $comic_id));
+      $sql = "UPDATE comics SET title = ?, genre = ?, artist = ?, description = ?, page_id = ?  WHERE comic_id = ?";
+      $dbResult = $this->db->query($sql, array($title, $genre, $artist, $description, $page_id, $comic_id));
       return $dbResult;
     }
   }

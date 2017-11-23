@@ -77,9 +77,27 @@ class Comic extends CI_Controller {
   public function updateAddComic() {
     // load models
     $this->load->model('comics_model');
-    //$this->load->model('filemgmt_model');
+    $this->load->model('filemgmt_model');
 
+    // get post data
+    $comic_id = (INT) $this->input->post('comic_id');
+    $title = $this->input->post('inputTitle');
+    $genre = $this->input->post('inputGenre');
+    $artist = $this->input->post('inputArtist');
+    $description = $this->input->post('inputDescription');
+
+    // write page info to db
+    $page_id = 0;
+    if(isset($_FILES['inputCover']['name'])) {
+      if($_FILES['inputCover']['name'] != "") {
+        $fname = $_FILES['inputCover']['name'];
+        $page_id = $this->filemgmt_model->storePage($comic_id, 0, $fname, 1, 0);
+      }
+    }
+
+    // write page to filesystem
     if(isset($_FILES['inputCover']['name'])) { // reachces when posting empy file data anyway
+      $config['file_name']            = $page_id;
       $config['upload_path']          = './uploads/';
       $config['allowed_types']        = 'gif|jpg|png';
 
@@ -98,21 +116,10 @@ class Comic extends CI_Controller {
       //echo "nope";
     }
 
-    return false; // debug
-
-    // get post data
-    $comic_id = (INT) $this->input->post('comic_id');
-    $title = $this->input->post('inputTitle');
-    $genre = $this->input->post('inputGenre');
-    $artist = $this->input->post('inputArtist');
-    $description = $this->input->post('inputDescription');
-    //$cover_image = $this->input->post('cover_image');
-
-    // update or add comic to db
-    $result = $this->comics_model->updateAddComic($comic_id, $title, $genre, $artist, $description);
+    // add comic info to db
+    $result = $this->comics_model->updateAddComic($comic_id, $title, $genre, $artist, $description, $page_id);
 
     // send back db response to ajax success
-    //$result = "posted";
     echo $result;
   }
 

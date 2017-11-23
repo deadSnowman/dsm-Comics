@@ -11,7 +11,7 @@
              <div class="panel-body">
                 <? //echo "<p>" . implode(", ", $c) . "</p>"; ?>
                 <p><? echo $c['title'] . " ~" . $c['artist']; ?></p>
-                <? echo '<img src="data:image/png;base64,'.base64_encode($c['cover_image']).'"/>'; ?>
+                <? //echo '<img src="data:image/png;base64,'.base64_encode($c['cover_image']).'"/>'; ?>
              </div>
            </div>
          </div>
