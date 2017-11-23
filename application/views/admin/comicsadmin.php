@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Comic Admin page</h1>
+  <h1>Comic Admin</h1>
 
   <div class="row">
     <div class="col-sm-7">

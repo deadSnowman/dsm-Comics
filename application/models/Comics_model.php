@@ -25,7 +25,27 @@ class Comics_model extends CI_Model {
     }
   }
 
-  /*public function getComicByID($comic_id=0) {
+  public function getCover($comic_id=0) {
+    if($comic_id != 0) {
+      //...
+    } else {
+      return false;
+    }
+  }
+
+  /*public function getComicInfo($comic_id=0) {
+    if($comic_id != 0) {
+      $sql = "SELECT comic_id, title, genre, artist, description, comics.page_id, filename FROM comics INNER JOIN pages ON comics.page_id = pages.page_id WHERE comic_id = ?";
+      $dbResult = $this->db->query($sql, array($comic_id));
+      $row = $dbResult->result(); // array
+      return json_encode($row[0]);
+    } else {
+      return false;
+    }
+  }*/
+
+  // used to fill out Edit Comic section in comic admin
+  public function getComicByID($comic_id=0) {
     if($comic_id != 0) {
       $sql = "SELECT * FROM comics WHERE comic_id = ?";
       $dbResult = $this->db->query($sql, array($comic_id));
@@ -34,7 +54,7 @@ class Comics_model extends CI_Model {
     } else {
       return false;
     }
-  }*/
+  }
 
   // todo: make sure only admin can use this
   public function updateAddComic($comic_id=0, $title="", $genre="", $artist="", $description="", $page_id=0, $user_id=0) {

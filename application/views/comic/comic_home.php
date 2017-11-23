@@ -9,8 +9,7 @@
          <div class="col-sm-3">
            <div class="panel panel-default">
              <div class="panel-body">
-                <? //echo "<p>" . implode(", ", $c) . "</p>"; ?>
-                <p><? echo $c['title'] . " ~" . $c['artist']; ?></p>
+                <? echo "<p><a href=\"" . site_url('comic/' . $c['comic_id']) ."\">" . implode(", ", $c) . "</a></p>"; ?>
                 <? //echo '<img src="data:image/png;base64,'.base64_encode($c['cover_image']).'"/>'; ?>
              </div>
            </div>

@@ -53,9 +53,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //$route['home/(:any)'] = 'home/$1';
 //$route['comic/(:any)'] = 'comic/$1';
 //$route['(:any)/(:any)'] = '$1/$2';
-$route['comic/(:any)'] = 'comic/$1';
+//$route['comic/(:any)'] = 'comic/$1';
 
-
+$route['comic/:num'] = 'comic/comic_view';
 
 $route['default_controller'] = 'comic';
 $route['404_override'] = '';

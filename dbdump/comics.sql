@@ -51,9 +51,10 @@ CREATE TABLE `comics` (
   `genre` varchar(45) DEFAULT NULL,
   `artist` varchar(45) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `cover_image` longblob,
+  `page_id` int(11) DEFAULT NULL,
+  `owner` int(11) DEFAULT NULL,
   PRIMARY KEY (`comic_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -62,7 +63,7 @@ CREATE TABLE `comics` (
 
 LOCK TABLES `comics` WRITE;
 /*!40000 ALTER TABLE `comics` DISABLE KEYS */;
-INSERT INTO `comics` VALUES (1,'First Comic','sci-fi','Seth Thomas','some test sci-fi comic',NULL),(53,'Second Comic','sci-fi','Seth Thomas','this one bombed',''),(55,'Test comic 3','who knows','me again','yo','');
+INSERT INTO `comics` VALUES (1,'First Comic','sci-fi','Seth Thomas','some test sci-fi comic',NULL,NULL),(53,'Second Comic','sci-fi','Seth Thomas','this one bombed',0,NULL),(55,'Test comic 3','who knows','me again','yo',0,NULL),(111,'shinespark','','','',13,NULL);
 /*!40000 ALTER TABLE `comics` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -76,11 +77,10 @@ DROP TABLE IF EXISTS `pages`;
 CREATE TABLE `pages` (
   `page_id` int(11) NOT NULL AUTO_INCREMENT,
   `chapter_id` varchar(45) DEFAULT NULL,
-  `filepath` varchar(255) DEFAULT NULL,
   `filename` varchar(255) DEFAULT NULL,
   `cover` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`page_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,6 +89,7 @@ CREATE TABLE `pages` (
 
 LOCK TABLES `pages` WRITE;
 /*!40000 ALTER TABLE `pages` DISABLE KEYS */;
+INSERT INTO `pages` VALUES (9,'0','shinespark.png',1),(10,'0','Shinespark_Fusion.png',1),(11,'0','Shinespark_Fusion.png',1),(12,'0','e4abc552440cf17d78d300d113f2e2af.jpg',1),(13,'0','e4abc552440cf17d78d300d113f2e2af.jpg',1),(14,'0','Shinespark_Fusion.png',1);
 /*!40000 ALTER TABLE `pages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -127,4 +128,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-22  5:27:41
+-- Dump completed on 2017-11-23  0:35:00
