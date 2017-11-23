@@ -1,3 +1,6 @@
+######## added
+dbdump/dumpdb.sh
+
 ######## github codeigniter gitignore
 
 */config/development
@@ -20,7 +23,6 @@ application/logs/*
 
 
 ######## gitignore moved from codeigniter base
-
 .DS_Store
 
 application/cache/*

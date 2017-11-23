@@ -28,41 +28,42 @@
         <div class="panel-body">
           <h2 id="ec_title">Edit Comic</h2>
 
-          <form class="form-horizontal">
-            <input type="hidden" id="comic_id" value="0">
+          <form class="form-horizontal" id="editComicForm" enctype="multipart/form-data">
+            <input type="hidden" name="comic_id" id="comic_id" value="0">
             <div class="form-group">
               <label for="inputTitle" class="col-sm-2 control-label">Cover</label>
               <input class="col-sm-10" type="file" name="inputCover" id="inputCover">
+              <!--<input class="col-sm-10" type="file" multiple name="inputCover[]" id="inputCover">-->
             </div>
             <div class="form-group">
               <label for="inputTitle" class="col-sm-2 control-label">Title</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputTitle" placeholder="Title">
+                <input type="text" class="form-control" name="inputTitle" id="inputTitle" placeholder="Title">
               </div>
             </div>
             <div class="form-group">
               <label for="inputGenre" class="col-sm-2 control-label">Genre</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputGenre" placeholder="Genre">
+                <input type="text" class="form-control" name="inputGenre" id="inputGenre" placeholder="Genre">
               </div>
             </div>
             <div class="form-group">
               <label for="inputArtist" class="col-sm-2 control-label">Artist</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputArtist" placeholder="Artist">
+                <input type="text" class="form-control" name="inputArtist" id="inputArtist" placeholder="Artist">
               </div>
             </div>
             <div class="form-group">
               <div class="col-sm-12">
                 <label for="inputDescription">Description:</label>
-                <textarea class="form-control" rows="5" id="inputDescription" placeholder="lorem ipsum and whatnot..."></textarea>
+                <textarea class="form-control" rows="5" name="inputDescription" id="inputDescription" placeholder="lorem ipsum and whatnot..."></textarea>
               </div>
             </div>
             <button type="button" class="btn btn-default" id="clear_editcomic">Clear</button>
             <div class="form-group pull-right">
               <div class="col-sm-offset-2 col-sm-10">
                 <button type="button" class="btn btn-default">Edit Pages</button>
-                <button type="button" class="btn btn-primary" id="update_add_comic">Update / Add</button>
+                <button type="submit" class="btn btn-primary" id="update_add_comic" value="upload">Update / Add</button>
               </div>
             </div>
             <div class="clearfix"></div>
