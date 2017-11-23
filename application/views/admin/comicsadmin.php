@@ -26,7 +26,7 @@
     <div class="col-sm-5">
       <div class="panel panel-default">
         <div class="panel-body">
-          <h2 id="ec_title">Edit Comic</h2>
+          <h2 id="ec_title">Add Comic</h2>
 
           <form class="form-horizontal" id="editComicForm" enctype="multipart/form-data">
             <input type="hidden" name="comic_id" id="comic_id" value="0">
@@ -62,7 +62,7 @@
             <button type="button" class="btn btn-default" id="clear_editcomic">Clear</button>
             <div class="form-group pull-right">
               <div class="col-sm-offset-2 col-sm-10">
-                <button type="button" class="btn btn-default">Edit Pages</button>
+                <button type="button" name="editpages" id="editpages" class="btn btn-default" style="display: none;">Edit Pages</button>
                 <button type="submit" class="btn btn-primary" id="update_add_comic" value="upload">Update / Add</button>
               </div>
             </div>

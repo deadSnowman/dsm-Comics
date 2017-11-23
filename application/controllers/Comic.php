@@ -23,33 +23,49 @@ class Comic extends CI_Controller {
     $this->load->view('common/openbody');
     $this->load->view('common/nav', $data);
     $this->load->view('comic/comic_home', $data);
+    $this->load->view('common/js.php');
     $this->load->view('common/footer');
   }
 
-  public function admin() {
+  public function admin($comic_id=0) {
+    // load models
+    $this->load->model('comics_model');
+
+    if($comic_id === 0) {
+      // get data
+      $data['comics'] = $this->comics_model->getComics();
+      $data['page'] = "admin";
+
+      // load views
+      $this->load->view('common/header');
+      $this->load->view('common/openbody');
+      $this->load->view('common/nav', $data);
+      $this->load->view('admin/comicsadmin', $data);
+      $this->load->view('admin/comicsadmin_js.php');
+      $this->load->view('common/closebody');
+      $this->load->view('common/footer');
+    } else {
+      // get data
+      $data['page'] = "admin";
+
+      // load views
+      $this->load->view('common/header');
+      $this->load->view('common/openbody');
+      $this->load->view('common/nav', $data);
+      $this->load->view('admin/pagesadmin', $data);
+      $this->load->view('admin/comicsadmin_js.php');
+      $this->load->view('common/closebody');
+      $this->load->view('common/footer');
+    }
+  }
+
+  public function comic_view($comic_id=0) {
     // load models
     $this->load->model('comics_model');
 
     // get data
-    $data['comics'] = $this->comics_model->getComics();
-    $data['page'] = "admin";
-
-    // load views
-    $this->load->view('common/header');
-    $this->load->view('common/openbody');
-    $this->load->view('common/nav', $data);
-    $this->load->view('admin/comicsadmin', $data);
-    $this->load->view('admin/comicsadmin_js.php');
-    $this->load->view('common/closebody');
-    $this->load->view('common/footer');
-  }
-
-  public function comic_view() {
-    // load models
-    $this->load->model('comics_model');
-
-    // get data
-    $data['comics'] = $this->comics_model->getComics();
+    $data['pages'] = $this->comics_model->getPages($comic_id);
+    $data['comic_title'] = json_decode($this->comics_model->getComicByID($comic_id), true)['title'];
     $data['page'] = "comic_view";
 
     // load views

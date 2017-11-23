@@ -30,15 +30,6 @@ CREATE TABLE `chapters` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `chapters`
---
-
-LOCK TABLES `chapters` WRITE;
-/*!40000 ALTER TABLE `chapters` DISABLE KEYS */;
-/*!40000 ALTER TABLE `chapters` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `comics`
 --
 
@@ -54,18 +45,8 @@ CREATE TABLE `comics` (
   `page_id` int(11) DEFAULT NULL,
   `owner` int(11) DEFAULT NULL,
   PRIMARY KEY (`comic_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `comics`
---
-
-LOCK TABLES `comics` WRITE;
-/*!40000 ALTER TABLE `comics` DISABLE KEYS */;
-INSERT INTO `comics` VALUES (1,'First Comic','sci-fi','Seth Thomas','some test sci-fi comic',NULL,NULL),(53,'Second Comic','sci-fi','Seth Thomas','this one bombed',0,NULL),(55,'Test comic 3','who knows','me again','yo',0,NULL),(111,'shinespark','','','',13,NULL);
-/*!40000 ALTER TABLE `comics` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `pages`
@@ -80,18 +61,8 @@ CREATE TABLE `pages` (
   `filename` varchar(255) DEFAULT NULL,
   `cover` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`page_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `pages`
---
-
-LOCK TABLES `pages` WRITE;
-/*!40000 ALTER TABLE `pages` DISABLE KEYS */;
-INSERT INTO `pages` VALUES (9,'0','shinespark.png',1),(10,'0','Shinespark_Fusion.png',1),(11,'0','Shinespark_Fusion.png',1),(12,'0','e4abc552440cf17d78d300d113f2e2af.jpg',1),(13,'0','e4abc552440cf17d78d300d113f2e2af.jpg',1),(14,'0','Shinespark_Fusion.png',1);
-/*!40000 ALTER TABLE `pages` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `users`
@@ -109,15 +80,6 @@ CREATE TABLE `users` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `users`
---
-
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -128,4 +90,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-23  0:35:00
+-- Dump completed on 2017-11-23  3:43:03

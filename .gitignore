@@ -1,5 +1,6 @@
 ######## added
 dbdump/dumpdb.sh
+!dbdump/comics.sql
 uploads/*
 
 ######## github codeigniter gitignore

@@ -7,6 +7,7 @@ class Comics_model extends CI_Model {
     date_default_timezone_set("America/New_York");
   }
 
+  // used in comic_home
   public function getComics() {
     $sql = "SELECT * FROM comics";
     $dbResult = $this->db->query($sql);
@@ -25,6 +26,19 @@ class Comics_model extends CI_Model {
     }
   }
 
+  // used in comic_view
+  public function getPages($comic_id=0) {
+    if($comic_id != 0) {
+      //$sql = "SELECT * FROM pages WHERE comic_id = ?";
+      $sql = "SELECT comic_id, title, genre, artist, description, comics.page_id, filename FROM comics INNER JOIN pages ON comics.page_id = pages.page_id WHERE comic_id = ? AND cover = 0";
+      $dbResult = $this->db->query($sql, array($comic_id));
+      $result = $dbResult->result_array();
+      return $result;
+    } else {
+      return false;
+    }
+  }
+
   public function getCover($comic_id=0) {
     if($comic_id != 0) {
       //...
@@ -32,17 +46,6 @@ class Comics_model extends CI_Model {
       return false;
     }
   }
-
-  /*public function getComicInfo($comic_id=0) {
-    if($comic_id != 0) {
-      $sql = "SELECT comic_id, title, genre, artist, description, comics.page_id, filename FROM comics INNER JOIN pages ON comics.page_id = pages.page_id WHERE comic_id = ?";
-      $dbResult = $this->db->query($sql, array($comic_id));
-      $row = $dbResult->result(); // array
-      return json_encode($row[0]);
-    } else {
-      return false;
-    }
-  }*/
 
   // used to fill out Edit Comic section in comic admin
   public function getComicByID($comic_id=0) {

@@ -2,11 +2,11 @@
 A webcomic webpage built with codeigniter (under development)
 
 ## To-Do (this list will grow)
-- comics, chapters, and pages views
+- comics home and pages views
 - admin login / admin page security
 - page and cover image upload
 - users admin, comics admin, and pages admin
-- menu bar breaks for mobile under home page
+- update cover in comic admin page
 
 ## Getting Started
 Just a small database setup and a few config modifications are needed
@@ -29,7 +29,10 @@ sudo service apache2 restart
 ```
 
 Also, set permissions for uploads directory to 777
+```
+sudo chmod -R 777 uploads
+```
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [license.txt](license.txt) file for details
 

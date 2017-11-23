@@ -13,7 +13,7 @@ $(document).ready(function () {
 });
 
 $('#clear_editcomic').click(function() {
-  $('#ec_title').html("Edit Comic");
+  $('#ec_title').html("Add Comic");
   $('#comic_id').val(0);
 
   $('#inputCover').val("");
@@ -21,6 +21,7 @@ $('#clear_editcomic').click(function() {
   $('#inputGenre').val("");
   $('#inputArtist').val("");
   $('#inputDescription').val("");
+  $('#editpages').hide();
 
   return false;
 });
@@ -59,15 +60,26 @@ $('#editComicForm').on('submit', function(e){
     processData: false,
     success: function(result) {
       //alert(result);
+      // update Comic List based on the Edit Comic criteria that was submitted
       if(comic_id == 0) {
         $('#comic_id').val(result); // update with insert_id
         $('#ec_title').html("Edit Comic - " + result); // update with insert_id
         $('.comic_list').append("<p class=\"comic_list_element_" + result + "\">"+
         "<a href=\"" + result + "\" onclick=\"return false;\" class=\"del_comic_list_item\"><span class=\"glyphicon glyphicon-trash\"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
         "<a href=\"" + result + "\" onclick=\"return false;\" class=\"comic_list_item\">" + title + " (" + genre + ") ~" + artist + "</a></p>");
+      } else {
+        $('p.comic_list_element_' + comic_id).html("<p class=\"comic_list_element_" + comic_id + "\">"+
+        "<a href=\"" + comic_id + "\" onclick=\"return false;\" class=\"del_comic_list_item\"><span class=\"glyphicon glyphicon-trash\"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+        "<a href=\"" + comic_id + "\" onclick=\"return false;\" class=\"comic_list_item\">" + title + " (" + genre + ") ~" + artist + "</a></p>");
       }
     }
   });
+});
+
+$('button#editpages').click(function() {
+  var base_url = "<? echo base_url(); ?>";
+  var comic_id = $('#comic_id').val();
+  if(comic_id != 0) window.location.href=base_url + "comic/admin/" + comic_id;
 });
 
 $(document).on("click", 'a.del_comic_list_item', function(event) {
@@ -119,6 +131,7 @@ $(document).on("click", 'a.comic_list_item', function(event) {
       $('#inputGenre').val(data.genre);
       $('#inputArtist').val(data.artist);
       $('#inputDescription').val(data.description);
+      $('#editpages').show();
     }
   });
 
