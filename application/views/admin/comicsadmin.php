@@ -63,7 +63,7 @@
             <div class="form-group pull-right">
               <div class="col-sm-offset-2 col-sm-10">
                 <button type="button" name="editpages" id="editpages" class="btn btn-default" style="display: none;">Edit Pages</button>
-                <button type="submit" class="btn btn-primary" id="update_add_comic" value="upload">Update / Add</button>
+                <button type="submit" class="btn btn-primary" id="update_add_comic" value="upload">Add</button>
               </div>
             </div>
             <div class="clearfix"></div>

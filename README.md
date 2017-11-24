@@ -6,7 +6,7 @@ A webcomic webpage built with codeigniter (under development)
 - admin login / admin page security
 - page and cover image upload
 - users admin, comics admin, and pages admin
-- update cover in comic admin page
+- differentiate between .png and other file times
 
 ## Getting Started
 Just a small database setup and a few config modifications are needed

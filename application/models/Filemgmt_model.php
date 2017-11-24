@@ -22,9 +22,19 @@ class Filemgmt_model extends CI_Model {
       $dbResult1 = $this->db->query($sql1, array($comic_id));
       $page_id = $dbResult1->row()->page_id;
 
-      // update data in pages table
-      $sql = "UPDATE pages SET chapter_id = ?, filename = ?, cover = ? WHERE page_id = ?";
-      $dbResult = $this->db->query($sql, array($chapter_id, $filename, $cover, $page_id));
+      // if there is no data in the pages table, add the image data
+      if($page_id == 0) { // === doesn't work.  There's some type juggling going on with the db return
+        $sql = "INSERT INTO pages (chapter_id, filename, cover) VALUES (?, ?, ?)";
+        if($this->db->query($sql, array($chapter_id, $filename, $cover))) {
+          $page_id = $this->db->insert_id();
+        } else {
+          return 0;
+        }
+      } else {
+        // update data in pages table
+        $sql = "UPDATE pages SET chapter_id = ?, filename = ?, cover = ? WHERE page_id = ?";
+        $dbResult = $this->db->query($sql, array($chapter_id, $filename, $cover, $page_id));
+      }
 
       return $page_id; // controller uses this to save image under new name
     }

@@ -21,6 +21,7 @@ $('#clear_editcomic').click(function() {
   $('#inputGenre').val("");
   $('#inputArtist').val("");
   $('#inputDescription').val("");
+  $('#update_add_comic').html('Add');
   $('#editpages').hide();
 
   return false;
@@ -67,6 +68,8 @@ $('#editComicForm').on('submit', function(e){
         $('.comic_list').append("<p class=\"comic_list_element_" + result + "\">"+
         "<a href=\"" + result + "\" onclick=\"return false;\" class=\"del_comic_list_item\"><span class=\"glyphicon glyphicon-trash\"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
         "<a href=\"" + result + "\" onclick=\"return false;\" class=\"comic_list_item\">" + title + " (" + genre + ") ~" + artist + "</a></p>");
+        $('#update_add_comic').html('Update');
+        $('#editpages').show();
       } else {
         $('p.comic_list_element_' + comic_id).html("<p class=\"comic_list_element_" + comic_id + "\">"+
         "<a href=\"" + comic_id + "\" onclick=\"return false;\" class=\"del_comic_list_item\"><span class=\"glyphicon glyphicon-trash\"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
@@ -131,6 +134,7 @@ $(document).on("click", 'a.comic_list_item', function(event) {
       $('#inputGenre').val(data.genre);
       $('#inputArtist').val(data.artist);
       $('#inputDescription').val(data.description);
+      $('#update_add_comic').html('Update');
       $('#editpages').show();
     }
   });
