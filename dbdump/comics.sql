@@ -24,9 +24,10 @@ DROP TABLE IF EXISTS `chapters`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `chapters` (
   `chapter_id` int(11) NOT NULL AUTO_INCREMENT,
-  `comic_id` varchar(45) DEFAULT NULL,
+  `comic_id` int(11) DEFAULT NULL,
+  `chapter_title` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`chapter_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +46,7 @@ CREATE TABLE `comics` (
   `page_id` int(11) DEFAULT NULL,
   `owner` int(11) DEFAULT NULL,
   PRIMARY KEY (`comic_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=131 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -57,11 +58,11 @@ DROP TABLE IF EXISTS `pages`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pages` (
   `page_id` int(11) NOT NULL AUTO_INCREMENT,
-  `chapter_id` varchar(45) DEFAULT NULL,
+  `chapter_id` int(11) DEFAULT NULL,
   `filename` varchar(255) DEFAULT NULL,
   `cover` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`page_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,4 +91,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-23  3:43:03
+-- Dump completed on 2017-11-23 21:37:32
