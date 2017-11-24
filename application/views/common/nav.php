@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="<? echo site_url(); ?>">Comics</a>
+          <a class="navbar-brand" href="<? echo site_url(); ?>">dsm-Comics</a>
         </div>
         <div class="navbar-collapse collapse" id="navbar">
           <ul class="nav navbar-nav">

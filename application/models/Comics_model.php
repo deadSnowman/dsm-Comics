@@ -9,7 +9,8 @@ class Comics_model extends CI_Model {
 
   // used in comic_home
   public function getComics() {
-    $sql = "SELECT * FROM comics";
+    //$sql = "SELECT * FROM comics";
+    $sql = "SELECT comics.*, comics.page_id, filename FROM comics LEFT JOIN pages ON comics.page_id = pages.page_id";
     $dbResult = $this->db->query($sql);
     $result = $dbResult->result_array();
     return $result;
@@ -66,9 +67,17 @@ class Comics_model extends CI_Model {
       $dbResult = $this->db->query($sql, array($title, $genre, $artist, $description, $page_id));
       return $this->db->insert_id();
     } else {
-      $sql = "UPDATE comics SET title = ?, genre = ?, artist = ?, description = ?, page_id = ?  WHERE comic_id = ?";
-      $dbResult = $this->db->query($sql, array($title, $genre, $artist, $description, $page_id, $comic_id));
-      return $dbResult;
+      if($page_id === 0) {
+        $sql = "UPDATE comics SET title = ?, genre = ?, artist = ?, description = ?  WHERE comic_id = ?";
+        $dbResult = $this->db->query($sql, array($title, $genre, $artist, $description, $comic_id));
+        return $comic_id;
+      } else {
+        print_r("here: " . $page_id);
+        $sql = "UPDATE comics SET title = ?, genre = ?, artist = ?, description = ?, page_id = ?  WHERE comic_id = ?";
+        $dbResult = $this->db->query($sql, array($title, $genre, $artist, $description, $page_id, $comic_id));
+        return $comic_id;
+      }
+
     }
   }
 

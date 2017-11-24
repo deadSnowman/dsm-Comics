@@ -113,23 +113,26 @@ class Comic extends CI_Controller {
 
     // write page to filesystem
     if(isset($_FILES['inputCover']['name'])) { // reachces when posting empy file data anyway
-      $config['file_name']            = $page_id;
-      $config['upload_path']          = './uploads/';
-      $config['allowed_types']        = 'gif|jpg|png';
+      if($_FILES['inputCover']['size'] != 0) {
+        $config['file_name']            = $page_id;
+        $config['upload_path']          = './uploads/';
+        $config['allowed_types']        = 'gif|jpg|png';
+        $config['overwrite']            = TRUE;
 
-      $this->load->library('upload', $config);
-      $this->upload->initialize($config);
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
 
-      if (!$this->upload->do_upload('inputCover')) {
-        $error = array('error' => $this->upload->display_errors());
-        //echo json_encode($error);
+        if (!$this->upload->do_upload('inputCover')) {
+          $error = array('error' => $this->upload->display_errors());
+          //echo json_encode($error);
+        }
+        else {
+          $data = array('upload_data' => $this->upload->data());
+          //echo json_encode($data);
+        }
+      } else {
+        //echo "nope";
       }
-      else {
-        $data = array('upload_data' => $this->upload->data());
-        //echo json_encode($data);
-      }
-    } else {
-      //echo "nope";
     }
 
     // add comic info to db

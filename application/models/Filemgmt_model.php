@@ -18,6 +18,15 @@ class Filemgmt_model extends CI_Model {
       }
     } else {
       // update image instead
+      $sql1 = "SELECT comics.*, comics.page_id, filename FROM comics LEFT JOIN pages ON comics.page_id = pages.page_id WHERE comic_id = ?";
+      $dbResult1 = $this->db->query($sql1, array($comic_id));
+      $page_id = $dbResult1->row()->page_id;
+
+      // update data in pages table
+      $sql = "UPDATE pages SET chapter_id = ?, filename = ?, cover = ? WHERE page_id = ?";
+      $dbResult = $this->db->query($sql, array($chapter_id, $filename, $cover, $page_id));
+
+      return $page_id; // controller uses this to save image under new name
     }
   }
 
