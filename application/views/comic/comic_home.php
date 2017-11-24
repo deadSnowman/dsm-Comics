@@ -11,7 +11,7 @@
              <div class="panel-body">
                 <? echo "<p><a href=\"" . site_url('comic/' . $c['comic_id']) ."\">" . implode(", ", $c) . "</a></p>"; ?>
                 <? if($c['page_id'] != 0) { ?>
-                  <? echo "<img height=\"200\" width=\"200\" src=\"" . site_url('uploads/' . $c['page_id'] . ".png") . "\" />"; ?>
+                  <? echo "<img height=\"200\" width=\"200\" src=\"" . site_url('uploads/' . $c['page_id']) . "\" />"; ?>
                 <?}?>
                 <? //echo '<img src="data:image/png;base64,'.base64_encode($c['cover_image']).'"/>'; ?>
              </div>

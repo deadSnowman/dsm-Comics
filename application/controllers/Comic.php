@@ -127,8 +127,13 @@ class Comic extends CI_Controller {
           //echo json_encode($error);
         }
         else {
-          $data = array('upload_data' => $this->upload->data());
-          //echo json_encode($data);
+          // upload file, and take out the file extension
+          $data = array('upload_data' => $this->upload->data()); //echo json_encode($data);
+          $img_data= $data['upload_data'];
+          $new_imgname=$page_id;
+          $new_imgpath=$img_data['file_path'].$new_imgname;
+          rename($img_data['full_path'], $new_imgpath);
+
         }
       } else {
         //echo "nope";
