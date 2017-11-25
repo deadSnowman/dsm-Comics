@@ -1,6 +1,4 @@
-    <div class="container">
-      <h1>Comic Home</h1>
-
+    <div class="container content">
 
       <? foreach ($comics as $key => $c) { ?>
         <? if($key % 4 == 0) { ?>

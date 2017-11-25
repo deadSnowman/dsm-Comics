@@ -1,11 +1,12 @@
-<div class="container">
-  <h1>Pages Admin</h1>
+<div class="container content">
 
   <div class="row">
     <div class="col-sm-7">
       <div class="panel panel-default">
+        <div class="panel-heading">
+          <strong>Pages List</strong>
+        </div>
         <div class="panel-body">
-          <h2>Pages List</h2>
           <div class="pages_list">
           <?
           print "<p>pages in here</p>";
@@ -16,8 +17,10 @@
     </div>
     <div class="col-sm-5">
       <div class="panel panel-default">
+        <div class="panel-heading">
+          <strong>Add Page</strong>
+        </div>
         <div class="panel-body">
-          <h2 id="ec_title">Add Page</h2>
 
           <form class="form-horizontal" id="editComicForm" enctype="multipart/form-data">
             <input type="hidden" name="comic_id" id="comic_id" value="0">

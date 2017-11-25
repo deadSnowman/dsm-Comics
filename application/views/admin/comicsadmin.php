@@ -1,18 +1,25 @@
 <div class="container">
 
+  <!--<div class="fl_container">
+    <div id="alertarea">
+    </div>
+  </div>-->
   <div class="fl_container">
     <div id="alertarea">
     </div>
   </div>
 
-  <h1>Comic Admin</h1>
+  <!--<h1>Comic Admin</h1>-->
 
-  <div class="row">
+  <div class="row content">
     <div class="col-sm-7">
       <div class="panel panel-default">
+        <div class="panel-heading">
+          <strong>Comics List</strong>
+          <button class="btn btn-primary btn-xs pull-right" id="pin_comic_list"><span class="glyphicon glyphicon-pushpin"></span></button>
+        </div>
         <div class="panel-body">
-          <button class="btn btn-primary pull-right" id="pin_comic_list"><span class="glyphicon glyphicon-pushpin"></span></button>
-          <h2>Comics List</h2>
+
 
           <div class="comic_list clearfix" id="sortable">
           <?
@@ -33,8 +40,10 @@
     </div>
     <div class="col-sm-5">
       <div class="panel panel-default">
+        <div class="panel-heading">
+          <strong>Add Comic</strong>
+        </div>
         <div class="panel-body">
-          <h2 id="ec_title">Add Comic</h2>
 
           <form class="form-horizontal" id="editComicForm" enctype="multipart/form-data">
             <input type="hidden" name="comic_id" id="comic_id" value="0">

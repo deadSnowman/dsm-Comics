@@ -18,6 +18,11 @@
               <a href="<? echo site_url('comic/admin'); ?>" class="shake hover">Admin</a>
             </li>
           </ul>
+          <!--<ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="#">Test</a>
+            </li>
+          </ul>-->
         </div>
         <!-- /.navbar-collapse -->
       </div>
