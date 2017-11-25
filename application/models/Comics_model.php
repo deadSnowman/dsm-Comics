@@ -10,7 +10,7 @@ class Comics_model extends CI_Model {
   // used in comic_home
   public function getComics() {
     //$sql = "SELECT * FROM comics";
-    $sql = "SELECT comics.*, comics.page_id, filename FROM comics LEFT JOIN pages ON comics.page_id = pages.page_id";
+    $sql = "SELECT comics.*, comics.page_id, filename FROM comics LEFT JOIN pages ON comics.page_id = pages.page_id ORDER BY comic_display_order";
     $dbResult = $this->db->query($sql);
     $result = $dbResult->result_array();
     return $result;
@@ -102,5 +102,13 @@ class Comics_model extends CI_Model {
     $dbResult3 = $this->db->query($sql3, array($comic_id));
 
     return $dbResult;
+  }
+
+  public function pinComics($display_order_arr) {
+    foreach ($display_order_arr as $key => $value) {
+      $sql = "UPDATE comics SET comic_display_order = ?  WHERE comic_id = ?";
+      $dbResult = $this->db->query($sql, array($key, $value));
+    }
+    return true; // this always succeeds, yup yup
   }
 }

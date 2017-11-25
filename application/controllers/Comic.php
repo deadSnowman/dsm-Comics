@@ -167,4 +167,19 @@ class Comic extends CI_Controller {
     // send back db response to ajax success
     echo $isdeleted;
   }
+
+  public function pinComics() {
+    // load models
+    $this->load->model('comics_model');
+
+    // get post data
+    $display_order_arr = $this->input->post('comic_display_order');
+
+    // store new display order
+    $result = $this->comics_model->pinComics($display_order_arr);
+
+    // send back (t/f) to ajax success
+    echo $result;
+
+  }
 }

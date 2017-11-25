@@ -1,5 +1,5 @@
 # dsm-Comics
-A webcomic webpage built with codeigniter (under development)
+A PHP and AJAX webcomic page built with CodeIgniter (under development)
 
 ## To-Do (this list will grow)
 - comics home and pages views
@@ -7,6 +7,7 @@ A webcomic webpage built with codeigniter (under development)
 - admin login / admin page security
 - page and cover image upload
 - users admin, comics admin, and pages admin
+- add a modal delete prompt for comics
 
 ## Getting Started
 Just a small database setup and a few config modifications are needed

@@ -49,21 +49,10 @@ $('#editComicForm').on('submit', function(e){
   var artist = $('#inputArtist').val();
   var description = $('#inputDescription').val();
 
-  // set data for the AJAX post
-  var post_data = {
-    'comic_id': comic_id,
-    'title': title,
-    'genre': genre,
-    'artist': artist,
-    'description': description,
-    'cover_image': cover_image
-  };
-
   // ajax post
   return $.ajax({
     type: 'POST',
     url: base_url + "comic/updateAddComic",
-    //data: post_data,
     data: new FormData(this),
     contentType: false,
     cache: false,
@@ -85,6 +74,7 @@ $('#editComicForm').on('submit', function(e){
         $('p.comic_list_element_' + comic_id).html("<p class=\"comic_list_element_" + comic_id + "\">"+
         "<a href=\"" + comic_id + "\" onclick=\"return false;\" class=\"del_comic_list_item\"><span class=\"glyphicon glyphicon-trash\"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
         "<a href=\"" + comic_id + "\" onclick=\"return false;\" class=\"comic_list_item\">" + title + " (" + genre + ") ~" + artist + "</a></p>");
+        alert_bar('comic updated', 's');
       }
     }
   });
@@ -114,15 +104,38 @@ $(document).on("click", 'a.del_comic_list_item', function(event) {
       if(result == true) {
         $(document).ajaxComplete(function() {
           $(".comic_list_element_"+comic_id).hide();
-          //alert_bar('comic deleted', 's'); // changes message for commic added for some reason
-        })
+        });
+        alert_bar('comic deleted', 's');
+      } else {
+        alert_bar('comic not deleted', 'w');
       }
     }
   });
 });
 
 $('#pin_comic_list').click(function() {
-  alert_bar('layout pinned', 's');
+  var base_url = "<? echo base_url(); ?>";
+
+  var post_data = {
+    'comic_display_order': []
+  };
+
+  $('.comic_list_item').each(function() {
+    post_data['comic_display_order'].push($(this).attr('href'));
+  });
+
+  // ajax post
+  return $.ajax({
+    type: 'POST',
+    url: base_url + "comic/pinComics",
+    data: post_data,
+    success: function(result) {
+      if(result == true) alert_bar('layout pinned', 's');
+      else alert_bar('layout not pinned', 'w');
+    }
+  });
+
+
 });
 
 function alert_bar(message, type) {

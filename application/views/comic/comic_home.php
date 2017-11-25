@@ -13,7 +13,6 @@
                 <? if($c['page_id'] != 0) { ?>
                   <? echo "<img height=\"200\" width=\"200\" src=\"" . site_url('uploads/' . $c['page_id']) . "\" />"; ?>
                 <?}?>
-                <? //echo '<img src="data:image/png;base64,'.base64_encode($c['cover_image']).'"/>'; ?>
              </div>
            </div>
          </div>
