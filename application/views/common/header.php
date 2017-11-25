@@ -15,5 +15,25 @@
         padding-top: 50px;
         padding-bottom: 20px;
       }
+
+      /* notification alignment */
+      .fl_container {
+          /*width:50%;*/
+          width: 100%;
+          /*right: 2px;*/
+          margin: 0 auto;
+          position: relative;
+      }
+      .notif_rules {
+          float: right;
+      }
+      .inner_notif_rules {
+          top: 40px;
+          position:fixed;
+          z-index: 100000000;
+      }
+      .notif_rules, .inner_notif_rules{
+          width: 300px;
+      }
     </style>
   </head>

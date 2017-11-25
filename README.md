@@ -3,6 +3,7 @@ A webcomic webpage built with codeigniter (under development)
 
 ## To-Do (this list will grow)
 - comics home and pages views
+- archive view
 - admin login / admin page security
 - page and cover image upload
 - users admin, comics admin, and pages admin

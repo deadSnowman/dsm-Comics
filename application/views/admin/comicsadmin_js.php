@@ -4,6 +4,15 @@
 <!-- ending javascript -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+<!-- for draggable ui -->
+<script>
+$( function() {
+  $( "#sortable" ).sortable();
+  $( "#sortable" ).disableSelection();
+} );
+</script>
 
 <!-- comics admin specific code -->
 <script type="text/javascript">
@@ -70,6 +79,8 @@ $('#editComicForm').on('submit', function(e){
         "<a href=\"" + result + "\" onclick=\"return false;\" class=\"comic_list_item\">" + title + " (" + genre + ") ~" + artist + "</a></p>");
         $('#update_add_comic').html('Update');
         $('#editpages').show();
+
+        alert_bar('comic added', 's');
       } else {
         $('p.comic_list_element_' + comic_id).html("<p class=\"comic_list_element_" + comic_id + "\">"+
         "<a href=\"" + comic_id + "\" onclick=\"return false;\" class=\"del_comic_list_item\"><span class=\"glyphicon glyphicon-trash\"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
@@ -103,11 +114,40 @@ $(document).on("click", 'a.del_comic_list_item', function(event) {
       if(result == true) {
         $(document).ajaxComplete(function() {
           $(".comic_list_element_"+comic_id).hide();
+          //alert_bar('comic deleted', 's'); // changes message for commic added for some reason
         })
       }
     }
   });
 });
+
+$('#pin_comic_list').click(function() {
+  alert_bar('layout pinned', 's');
+});
+
+function alert_bar(message, type) {
+  $('#alertarea').html('<div id="alert"></div>');
+  $('#alertarea').addClass('notif_rules');
+  if(type == 's') {
+    $('#alert').addClass('alert alert-success fade in alert-dismissable inner_notif_rules');
+  } else if (type == 'w') {
+    $('#alert').addClass('alert alert-warning fade in alert-dismissable inner_notif_rules');
+  } else if (type == 'i') {
+    $('#alert').addClass('alert alert-info fade in alert-dismissable inner_notif_rules');
+  } else if (type == 'd') {
+    $('#alert').addClass('alert alert-danger fade in alert-dismissable inner_notif_rules');
+  }
+
+  $('#alert').addClass('alert alert-success fade in alert-dismissable');
+  $('#alert').css({'margin-top': '18px'});
+  $('#alert').html('<a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>' + message);
+
+  // auto close with fancy animation
+  $("#alert").fadeTo(2000, 500).slideUp(500, function(){
+    $("#alert").slideUp(500);
+  });
+
+}
 
 $(document).on("click", 'a.comic_list_item', function(event) {
   var base_url = "<? echo base_url(); ?>";

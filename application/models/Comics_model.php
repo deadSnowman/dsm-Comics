@@ -30,8 +30,7 @@ class Comics_model extends CI_Model {
   // used in comic_view
   public function getPages($comic_id=0) {
     if($comic_id != 0) {
-      //$sql = "SELECT * FROM pages WHERE comic_id = ?";
-      $sql = "SELECT comic_id, title, genre, artist, description, comics.page_id, filename FROM comics INNER JOIN pages ON comics.page_id = pages.page_id WHERE comic_id = ? AND cover = 0";
+      $sql = "SELECT comics.*, comics.page_id, filename FROM comics INNER JOIN pages ON comics.page_id = pages.page_id WHERE comics.comic_id = ? AND cover = 0";
       $dbResult = $this->db->query($sql, array($comic_id));
       $result = $dbResult->result_array();
       return $result;

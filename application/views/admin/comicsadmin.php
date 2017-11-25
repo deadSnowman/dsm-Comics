@@ -1,12 +1,23 @@
 <div class="container">
+
+  <div class="fl_container">
+  <div id="alertarea">
+  </div></div>
+  <!--<div id="alertarea" class="alert alert-success fade in alert-dismissable" style="margin-top:18px;">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+    <strong>Success!</strong> This alert box indicates a successful or positive action.
+  </div>-->
+
   <h1>Comic Admin</h1>
 
   <div class="row">
     <div class="col-sm-7">
       <div class="panel panel-default">
         <div class="panel-body">
+          <button class="btn btn-primary pull-right" id="pin_comic_list"><span class="glyphicon glyphicon-pushpin"></span></button>
           <h2>Comics List</h2>
-          <div class="comic_list">
+
+          <div class="comic_list clearfix" id="sortable">
           <?
           foreach ($comics as $c) {
             ?>
