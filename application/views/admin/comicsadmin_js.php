@@ -76,9 +76,33 @@ $('#editComicForm').on('submit', function(e){
         "<a href=\"" + comic_id + "\" onclick=\"return false;\" class=\"comic_list_item\">" + title + " (" + genre + ") ~" + artist + "</a></p>");
         alert_bar('comic updated', 's');
       }
+
+      pin_comic_layout(false); // click pin button, but don't show the notification
     }
   });
 });
+
+function pin_comic_layout(alert_option) {
+
+  var base_url = "<? echo base_url(); ?>";
+
+  var post_data = {
+    'comic_display_order': []
+  };
+
+  $('.comic_list_item').each(function() {
+    post_data['comic_display_order'].push($(this).attr('href'));
+  });
+
+  // ajax post
+  return $.ajax({
+    type: 'POST',
+    url: base_url + "comic/pinComics",
+    data: post_data,
+    success: function(result) { if(alert_option == true) result == true ? alert_bar('layout pinned', 's') : alert_bar('layout not pinned', 'w'); }
+  });
+
+}
 
 $('button#editpages').click(function() {
   var base_url = "<? echo base_url(); ?>";
@@ -114,28 +138,7 @@ $(document).on("click", 'a.del_comic_list_item', function(event) {
 });
 
 $('#pin_comic_list').click(function() {
-  var base_url = "<? echo base_url(); ?>";
-
-  var post_data = {
-    'comic_display_order': []
-  };
-
-  $('.comic_list_item').each(function() {
-    post_data['comic_display_order'].push($(this).attr('href'));
-  });
-
-  // ajax post
-  return $.ajax({
-    type: 'POST',
-    url: base_url + "comic/pinComics",
-    data: post_data,
-    success: function(result) {
-      if(result == true) alert_bar('layout pinned', 's');
-      else alert_bar('layout not pinned', 'w');
-    }
-  });
-
-
+  pin_comic_layout(true);
 });
 
 function alert_bar(message, type) {
@@ -181,7 +184,6 @@ $(document).on("click", 'a.comic_list_item', function(event) {
       $('#ec_title').html("Edit Comic - " + comic_id);
 
       var data = JSON.parse(result);
-      //$('#inputCover').val(data.cover_image); // breaks atm
       $('#inputCover').val("");
       $('#inputTitle').val(data.title);
       $('#inputGenre').val(data.genre);
