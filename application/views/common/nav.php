@@ -15,7 +15,7 @@
               <a href="<? echo site_url(); ?>">Home</a>
             </li>
             <li <? if($page === "admin") echo "class=\"active\""; ?>>
-              <a href="<? echo site_url('comic/admin'); ?>">Admin</a>
+              <a href="<? echo site_url('comic/admin'); ?>" class="shake hover">Admin</a>
             </li>
           </ul>
         </div>

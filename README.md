@@ -8,6 +8,7 @@ A PHP and AJAX webcomic page built with CodeIgniter (under development)
 - page and cover image upload
 - users admin, comics admin, and pages admin
 - add a modal delete prompt for comics
+- add delete file button in admin page
 
 ## Getting Started
 Just a small database setup and a few config modifications are needed
