@@ -141,10 +141,13 @@ class Comic extends CI_Controller {
     }
 
     // add comic info to db
-    $result = $this->comics_model->updateAddComic($comic_id, $title, $genre, $artist, $description, $page_id);
+    $comic_id = $this->comics_model->updateAddComic($comic_id, $title, $genre, $artist, $description, $page_id);
+
+    // update page (cover) added with comic_id
+    //if($page_id != 0) $this->filemgmt_model->updateComicIDForPage($page_id, $comic_id);
 
     // send back db response to ajax success
-    echo $result;
+    echo $comic_id;
   }
 
   public function delComic() {

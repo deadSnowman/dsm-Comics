@@ -31,7 +31,7 @@
           <form class="form-horizontal" id="editComicForm" enctype="multipart/form-data">
             <input type="hidden" name="comic_id" id="comic_id" value="0">
             <div class="form-group">
-              <label for="inputTitle" class="col-sm-2 control-label">Cover</label>
+              <label for="inputCover" class="col-sm-2 control-label">Cover</label>
               <input class="col-sm-10" type="file" name="inputCover" id="inputCover">
               <!--<input class="col-sm-10" type="file" multiple name="inputCover[]" id="inputCover">-->
             </div>

@@ -46,7 +46,7 @@ CREATE TABLE `comics` (
   `page_id` int(11) DEFAULT NULL,
   `owner` int(11) DEFAULT NULL,
   PRIMARY KEY (`comic_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=131 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=174 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -62,7 +62,7 @@ CREATE TABLE `pages` (
   `filename` varchar(255) DEFAULT NULL,
   `cover` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`page_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,4 +91,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-23 21:37:32
+-- Dump completed on 2017-11-24 17:56:46

@@ -83,8 +83,17 @@ class Comics_model extends CI_Model {
 
   // todo: make sure only admin can use this
   public function delComic($comic_id=0){
+    // delete comic
     $sql = "DELETE FROM comics WHERE comic_id = ?";
     $dbResult = $this->db->query($sql, array($comic_id));
+
+    // delete associated chapters
+    // ...
+
+    // delete associated pages
+    //$sql3 = "DELETE FROM pages WHERE comic_id = ?";
+    //$dbResult3 = $this->db->query($sql3, array($comic_id));
+
     return $dbResult;
   }
 }

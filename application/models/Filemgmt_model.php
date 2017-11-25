@@ -40,4 +40,11 @@ class Filemgmt_model extends CI_Model {
     }
   }
 
+  /*public function updateComicIDForPage($page_id=0, $comic_id=0) {
+    if($comic_id != 0) {
+      $sql = "UPDATE pages SET comic_id = ? WHERE page_id = ?";
+      $dbResult = $this->db->query($sql, array($comic_id));
+    }
+  }*/
+
 }
