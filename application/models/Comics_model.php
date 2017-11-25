@@ -90,8 +90,13 @@ class Comics_model extends CI_Model {
     // delete associated chapters (I may not end up having the chapters table)
     // ...
 
-    // delete associated files
-    // ...
+    // delete associated pages (in filesystem)
+    $sql_files = "SELECT page_id FROM pages WHERE comic_id = ?";
+    $dbResult_files = $this->db->query($sql_files, array($comic_id));
+    foreach ($dbResult_files->result_array() as $row) {
+      if(isset($row['page_id'])) unlink('uploads/'. $row['page_id']);
+    }
+    //unlink("uploads/84"); //works
 
     // delete associated pages
     $sql3 = "DELETE FROM pages WHERE comic_id = ?";

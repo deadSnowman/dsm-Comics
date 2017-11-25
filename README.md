@@ -6,7 +6,6 @@ A webcomic webpage built with codeigniter (under development)
 - admin login / admin page security
 - page and cover image upload
 - users admin, comics admin, and pages admin
-- make delete comic remove files as well as the associated pages in the pages table
 
 ## Getting Started
 Just a small database setup and a few config modifications are needed
