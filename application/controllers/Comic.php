@@ -104,52 +104,55 @@ class Comic extends CI_Controller {
   }
 
   public function updateAddComic() {
-    // load models
-    $this->load->model('comics_model');
-    $this->load->model('filemgmt_model');
+    if($this->session->userdata('username') != "") {
+      // load models
+      $this->load->model('comics_model');
+      $this->load->model('filemgmt_model');
 
-    // get post data
-    $comic_id = (INT) $this->input->post('comic_id');
-    $title = $this->input->post('inputTitle');
-    $genre = $this->input->post('inputGenre');
-    $artist = $this->input->post('inputArtist');
-    $description = $this->input->post('inputDescription');
+      // get post data
+      $comic_id = (INT) $this->input->post('comic_id');
+      $title = $this->input->post('inputTitle');
+      $genre = $this->input->post('inputGenre');
+      $artist = $this->input->post('inputArtist');
+      $description = $this->input->post('inputDescription');
 
-    // write page info to db
-    $page_id = 0;
-    if(isset($_FILES['inputCover']['name'])) {
-      if($_FILES['inputCover']['name'] != "") {
-        $fname = $_FILES['inputCover']['name'];
-        $page_id = $this->filemgmt_model->storePage($comic_id, 0, $fname, 1, 0);
-      }
-    }
-
-    // write page to filesystem
-    if(isset($_FILES['inputCover']['name'])) { // reachces when posting empy file data anyway
-      if($_FILES['inputCover']['size'] != 0) {
-        $config['file_name']            = $page_id;
-        $config['upload_path']          = './uploads/';
-        $config['allowed_types']        = 'gif|jpg|png';
-        $config['overwrite']            = TRUE;
-
-        $this->load->library('upload', $config);
-        $this->upload->initialize($config);
-
-        if (!$this->upload->do_upload('inputCover')) {
-          $error = array('error' => $this->upload->display_errors());
-          //echo json_encode($error);
+      // write page info to db
+      $page_id = 0;
+      if(isset($_FILES['inputCover']['name'])) {
+        if($_FILES['inputCover']['name'] != "") {
+          $fname = $_FILES['inputCover']['name'];
+          $page_id = $this->filemgmt_model->storePage($comic_id, 0, $fname, 1, 0);
         }
-        else {
-          // upload file, and take out the file extension
-          $data = array('upload_data' => $this->upload->data()); //echo json_encode($data);
-          $img_data= $data['upload_data'];
-          $new_imgname=$page_id;
-          $new_imgpath=$img_data['file_path'].$new_imgname;
-          rename($img_data['full_path'], $new_imgpath);
+      }
 
+      // write page to filesystem
+      if(isset($_FILES['inputCover']['name'])) { // reachces when posting empy file data anyway
+        if($_FILES['inputCover']['size'] != 0) {
+          $config['file_name']            = $page_id;
+          $config['upload_path']          = './uploads/';
+          $config['allowed_types']        = 'gif|jpg|png';
+          $config['overwrite']            = TRUE;
+
+          $this->load->library('upload', $config);
+          $this->upload->initialize($config);
+
+          if (!$this->upload->do_upload('inputCover')) {
+            $error = array('error' => $this->upload->display_errors());
+            //echo json_encode($error);
+          }
+          else {
+            // upload file, and take out the file extension
+            $data = array('upload_data' => $this->upload->data()); //echo json_encode($data);
+            $img_data= $data['upload_data'];
+            $new_imgname=$page_id;
+            $new_imgpath=$img_data['file_path'].$new_imgname;
+            rename($img_data['full_path'], $new_imgpath);
+          }
+        } else {
+          //echo "nope";
         }
       } else {
-        //echo "nope";
+        redirect(base_url() . 'login');
       }
     }
 
@@ -168,31 +171,39 @@ class Comic extends CI_Controller {
   }
 
   public function delComic() {
-    // load models
-    $this->load->model('comics_model');
+    if($this->session->userdata('username') != "") {
+      // load models
+      $this->load->model('comics_model');
 
-    // get post data
-    $comic_id = (INT) $this->input->post('comic_id');
+      // get post data
+      $comic_id = (INT) $this->input->post('comic_id');
 
-    // run delete
-    $isdeleted = $this->comics_model->delComic($comic_id);
+      // run delete
+      $isdeleted = $this->comics_model->delComic($comic_id);
 
-    // send back db response to ajax success
-    echo $isdeleted;
+      // send back db response to ajax success
+      echo $isdeleted;
+    } else {
+      redirect(base_url() . 'login');
+    }
   }
 
   public function pinComics() {
-    // load models
-    $this->load->model('comics_model');
+    if($this->session->userdata('username') != "") {
+      // load models
+      $this->load->model('comics_model');
 
-    // get post data
-    $display_order_arr = $this->input->post('comic_display_order');
+      // get post data
+      $display_order_arr = $this->input->post('comic_display_order');
 
-    // store new display order
-    $result = $this->comics_model->pinComics($display_order_arr);
+      // store new display order
+      $result = $this->comics_model->pinComics($display_order_arr);
 
-    // send back (t/f) to ajax success
-    echo $result;
+      // send back (t/f) to ajax success
+      echo $result;
+    } else {
+      redirect(base_url() . 'login');
+    }
 
   }
 }

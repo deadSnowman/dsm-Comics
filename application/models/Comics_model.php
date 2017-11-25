@@ -59,56 +59,65 @@ class Comics_model extends CI_Model {
     }
   }
 
-  // todo: make sure only admin can use this
   public function updateAddComic($comic_id=0, $title="", $genre="", $artist="", $description="", $page_id=0, $user_id=0) {
-    if($comic_id === 0) {
-      $sql = "INSERT INTO comics (title, genre, artist, description, page_id) VALUES (?, ?, ?, ?, ?)";
-      $dbResult = $this->db->query($sql, array($title, $genre, $artist, $description, $page_id));
-      return $this->db->insert_id();
-    } else {
-      if($page_id === 0) {
-        $sql = "UPDATE comics SET title = ?, genre = ?, artist = ?, description = ?  WHERE comic_id = ?";
-        $dbResult = $this->db->query($sql, array($title, $genre, $artist, $description, $comic_id));
-        return $comic_id;
+    if($this->session->userdata('username') != "") {
+      if($comic_id === 0) {
+        $sql = "INSERT INTO comics (title, genre, artist, description, page_id) VALUES (?, ?, ?, ?, ?)";
+        $dbResult = $this->db->query($sql, array($title, $genre, $artist, $description, $page_id));
+        return $this->db->insert_id();
       } else {
-        print_r("here: " . $page_id);
-        $sql = "UPDATE comics SET title = ?, genre = ?, artist = ?, description = ?, page_id = ?  WHERE comic_id = ?";
-        $dbResult = $this->db->query($sql, array($title, $genre, $artist, $description, $page_id, $comic_id));
-        return $comic_id;
+        if($page_id === 0) {
+          $sql = "UPDATE comics SET title = ?, genre = ?, artist = ?, description = ?  WHERE comic_id = ?";
+          $dbResult = $this->db->query($sql, array($title, $genre, $artist, $description, $comic_id));
+          return $comic_id;
+        } else {
+          print_r("here: " . $page_id);
+          $sql = "UPDATE comics SET title = ?, genre = ?, artist = ?, description = ?, page_id = ?  WHERE comic_id = ?";
+          $dbResult = $this->db->query($sql, array($title, $genre, $artist, $description, $page_id, $comic_id));
+          return $comic_id;
+        }
       }
-
+    } else {
+      redirect(base_url() . 'login');
     }
   }
 
-  // todo: make sure only admin can use this
   public function delComic($comic_id=0){
-    // delete comic
-    $sql = "DELETE FROM comics WHERE comic_id = ?";
-    $dbResult = $this->db->query($sql, array($comic_id));
+    if($this->session->userdata('username') != "") {
+      // delete comic
+      $sql = "DELETE FROM comics WHERE comic_id = ?";
+      $dbResult = $this->db->query($sql, array($comic_id));
 
-    // delete associated chapters (I may not end up having the chapters table)
-    // ...
+      // delete associated chapters (I may not end up having the chapters table)
+      // ...
 
-    // delete associated pages (in filesystem)
-    $sql_files = "SELECT page_id FROM pages WHERE comic_id = ?";
-    $dbResult_files = $this->db->query($sql_files, array($comic_id));
-    foreach ($dbResult_files->result_array() as $row) {
-      if(isset($row['page_id'])) unlink('uploads/'. $row['page_id']);
+      // delete associated pages (in filesystem)
+      $sql_files = "SELECT page_id FROM pages WHERE comic_id = ?";
+      $dbResult_files = $this->db->query($sql_files, array($comic_id));
+      foreach ($dbResult_files->result_array() as $row) {
+        if(isset($row['page_id'])) unlink('uploads/'. $row['page_id']);
+      }
+      //unlink("uploads/84"); //works
+
+      // delete associated pages
+      $sql3 = "DELETE FROM pages WHERE comic_id = ?";
+      $dbResult3 = $this->db->query($sql3, array($comic_id));
+
+      return $dbResult;
+    } else {
+      redirect(base_url() . 'login');
     }
-    //unlink("uploads/84"); //works
-
-    // delete associated pages
-    $sql3 = "DELETE FROM pages WHERE comic_id = ?";
-    $dbResult3 = $this->db->query($sql3, array($comic_id));
-
-    return $dbResult;
   }
 
   public function pinComics($display_order_arr) {
-    foreach ($display_order_arr as $key => $value) {
-      $sql = "UPDATE comics SET comic_display_order = ?  WHERE comic_id = ?";
-      $dbResult = $this->db->query($sql, array($key, $value));
+    if($this->session->userdata('username') != "") {
+      foreach ($display_order_arr as $key => $value) {
+        $sql = "UPDATE comics SET comic_display_order = ?  WHERE comic_id = ?";
+        $dbResult = $this->db->query($sql, array($key, $value));
+      }
+      return true; // this always succeeds, yup yup
+    } else {
+      redirect(base_url() . 'login');
     }
-    return true; // this always succeeds, yup yup
   }
 }

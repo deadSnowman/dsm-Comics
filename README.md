@@ -18,6 +18,11 @@ Just a small database setup and a few config modifications are needed
 ### Setup
 Open and modify application/config/database.php after running the database script supplied in "dbdump" to match your database setup
 
+Set the encryption_key in application/config/config.php
+'''
+$config['encryption_key'] = 'somethingelse';
+'''
+
 If you're using Linux, open /etc/apache2/apache2.conf and change to
 ```
 AllowOverride All

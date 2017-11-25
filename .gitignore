@@ -1,10 +1,10 @@
 ######## added
+application/config/config.php
 dbdump/dumpdb.sh
 !dbdump/comics.sql
 uploads/*
 
 ######## github codeigniter gitignore
-
 */config/development
 */logs/log-*.php
 !*/logs/index.html
