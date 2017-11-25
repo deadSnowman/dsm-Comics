@@ -15,7 +15,7 @@
               <a href="<? echo site_url(); ?>">Home</a>
             </li>
             <li <? if($page === "admin") echo "class=\"active\""; ?>>
-              <a href="<? echo site_url('comic/admin'); ?>" class="shake hover">Admin</a>
+              <a href="<? echo site_url('comic/admin'); ?>" <? if($this->session->userdata('username') == "") echo 'class="shake hover"'; ?>>Admin</a>
             </li>
           </ul>
           <?
@@ -26,12 +26,6 @@
             </li>
           </ul>
           <?}?>
-          <!--<ul class="nav navbar-nav navbar-right">
-            <li>
-              <a href="#">Test</a>
-            </li>
-          </ul>-->
         </div>
-        <!-- /.navbar-collapse -->
       </div>
     </nav>
