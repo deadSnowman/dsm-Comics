@@ -18,6 +18,14 @@
               <a href="<? echo site_url('comic/admin'); ?>" class="shake hover">Admin</a>
             </li>
           </ul>
+          <?
+          if($this->session->userdata('username') != "") {?>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="<? echo base_url(); ?>login/logout">Logout</a>
+            </li>
+          </ul>
+          <?}?>
           <!--<ul class="nav navbar-nav navbar-right">
             <li>
               <a href="#">Test</a>

@@ -28,40 +28,48 @@ class Comic extends CI_Controller {
   }
 
   public function admin($comic_id=0) {
-    // load models
-    $this->load->model('comics_model');
+    if($this->session->userdata('username') != "") {
+      //echo '<h2>Welcome - '.$this->session->userdata('username').'</h2>';
+      //echo '<a href="'.base_url().'login/logout">Logout</a>';
+      // load models
+      $this->load->model('comics_model');
 
-    if($comic_id === 0) {
-      // get data
-      $data['comics'] = $this->comics_model->getComics();
-      $data['page'] = "admin";
+      if($comic_id === 0) {
+        // get data
+        $data['comics'] = $this->comics_model->getComics();
+        $data['page'] = "admin";
 
-      $data['csrf'] = array(
-        'name' => $this->security->get_csrf_token_name(),
-        'hash' => $this->security->get_csrf_hash()
-      );
+        $data['csrf'] = array(
+          'name' => $this->security->get_csrf_token_name(),
+          'hash' => $this->security->get_csrf_hash()
+        );
 
-      // load views
-      $this->load->view('common/header');
-      $this->load->view('common/openbody');
-      $this->load->view('common/nav', $data);
-      $this->load->view('admin/comicsadmin', $data);
-      $this->load->view('admin/comicsadmin_js.php');
-      $this->load->view('common/closebody');
-      $this->load->view('common/footer');
+        // load views
+        $this->load->view('common/header');
+        $this->load->view('common/openbody');
+        $this->load->view('common/nav', $data);
+        $this->load->view('admin/comicsadmin', $data);
+        $this->load->view('admin/comicsadmin_js.php');
+        $this->load->view('common/closebody');
+        $this->load->view('common/footer');
+      } else {
+        // get data
+        $data['page'] = "admin";
+
+        // load views
+        $this->load->view('common/header');
+        $this->load->view('common/openbody');
+        $this->load->view('common/nav', $data);
+        $this->load->view('admin/pagesadmin', $data);
+        $this->load->view('admin/comicsadmin_js.php');
+        $this->load->view('common/closebody');
+        $this->load->view('common/footer');
+      }
     } else {
-      // get data
-      $data['page'] = "admin";
-
-      // load views
-      $this->load->view('common/header');
-      $this->load->view('common/openbody');
-      $this->load->view('common/nav', $data);
-      $this->load->view('admin/pagesadmin', $data);
-      $this->load->view('admin/comicsadmin_js.php');
-      $this->load->view('common/closebody');
-      $this->load->view('common/footer');
+      redirect(base_url() . 'login');
     }
+
+
   }
 
   public function comic_view($comic_id=0) {
