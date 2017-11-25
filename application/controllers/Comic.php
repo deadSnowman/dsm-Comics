@@ -143,8 +143,12 @@ class Comic extends CI_Controller {
     // add comic info to db
     $comic_id = $this->comics_model->updateAddComic($comic_id, $title, $genre, $artist, $description, $page_id);
 
-    // update page (cover) added with comic_id
-    //if($page_id != 0) $this->filemgmt_model->updateComicIDForPage($page_id, $comic_id);
+    // add the comic_id to the pages table if a file was posted
+    if(isset($_FILES['inputCover']['name'])) {
+      if($_FILES['inputCover']['name'] != "") {
+        $this->filemgmt_model->updateComicIDForPage($page_id, $comic_id);
+      }
+    }
 
     // send back db response to ajax success
     echo $comic_id;

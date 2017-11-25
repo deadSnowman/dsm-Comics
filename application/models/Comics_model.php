@@ -87,12 +87,15 @@ class Comics_model extends CI_Model {
     $sql = "DELETE FROM comics WHERE comic_id = ?";
     $dbResult = $this->db->query($sql, array($comic_id));
 
-    // delete associated chapters
+    // delete associated chapters (I may not end up having the chapters table)
+    // ...
+
+    // delete associated files
     // ...
 
     // delete associated pages
-    //$sql3 = "DELETE FROM pages WHERE comic_id = ?";
-    //$dbResult3 = $this->db->query($sql3, array($comic_id));
+    $sql3 = "DELETE FROM pages WHERE comic_id = ?";
+    $dbResult3 = $this->db->query($sql3, array($comic_id));
 
     return $dbResult;
   }
