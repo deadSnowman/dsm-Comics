@@ -36,6 +36,11 @@ class Comic extends CI_Controller {
       $data['comics'] = $this->comics_model->getComics();
       $data['page'] = "admin";
 
+      $data['csrf'] = array(
+        'name' => $this->security->get_csrf_token_name(),
+        'hash' => $this->security->get_csrf_hash()
+      );
+
       // load views
       $this->load->view('common/header');
       $this->load->view('common/openbody');

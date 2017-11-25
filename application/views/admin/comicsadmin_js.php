@@ -87,7 +87,8 @@ function pin_comic_layout(alert_option) {
   var base_url = "<? echo base_url(); ?>";
 
   var post_data = {
-    'comic_display_order': []
+    'comic_display_order': [],
+    '<?php echo $this->security->get_csrf_token_name(); ?>' : '<?php echo $this->security->get_csrf_hash(); ?>'
   };
 
   $('.comic_list_item').each(function() {
@@ -116,7 +117,8 @@ $(document).on("click", 'a.del_comic_list_item', function(event) {
 
   // set data for the AJAX post
   var post_data = {
-    'comic_id': comic_id
+    'comic_id': comic_id,
+    '<?php echo $this->security->get_csrf_token_name(); ?>' : '<?php echo $this->security->get_csrf_hash(); ?>'
   };
 
   // ajax post
@@ -171,7 +173,8 @@ $(document).on("click", 'a.comic_list_item', function(event) {
 
   // set data for the AJAX post
   var post_data = {
-    'comic_id': comic_id
+    'comic_id': comic_id,
+    '<?php echo $this->security->get_csrf_token_name(); ?>' : '<?php echo $this->security->get_csrf_hash(); ?>'
   };
 
   // ajax post

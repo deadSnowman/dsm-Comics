@@ -75,6 +75,7 @@
               </div>
             </div>
             <div class="clearfix"></div>
+            <input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
           </form>
 
 

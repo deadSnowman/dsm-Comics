@@ -15,6 +15,7 @@
           <div class="form-group">
             <button type="button" class="btn btn-primary">|<</button>
             <button type="button" class="btn btn-primary"><</button>
+            <button type="button" class="btn btn-primary">random</button>
             <button type="button" class="btn btn-primary">></button>
             <button type="button" class="btn btn-primary">>|</button>
           </div>
