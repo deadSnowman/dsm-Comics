@@ -1,6 +1,8 @@
 # dsm-Comics
 A PHP and AJAX webcomic page built with CodeIgniter (under development)
 
+[![dsm-Comics video](https://i.imgur.com/C41G2f9.png)](http://www.youtube.com/watch_popup?v=DYF4OVfUcmQ)
+
 ## To-Do (this list will grow)
 - clean up comics home and pages views
 - archive view - make some url scheme that loads the specific file in the comic view and tie it to the archives
