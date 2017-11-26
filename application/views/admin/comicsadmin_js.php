@@ -34,6 +34,7 @@ $('#clear_editcomic').click(function() {
   $('#inputDescription').val("");
   $('#update_add_comic').html('Add');
   $('#editpages').hide();
+  unset_cover_buttons();
 
   return false;
 });
@@ -103,15 +104,16 @@ $('#editComicForm').on('submit', function(e){
       var res = JSON.parse(result);
       var status = res['status'];
       //var status = JSON.parse(result)['status'];
-
-      //var mess = JSON.parse(result)['alert_bar'];
       //alert(status);
       if(status === "w") {
         alert_bar(res['alert_bar'], 'w');
       } else {
         var c_id = res['comic_id'];
+        var p_id = res['page_id'];
         //alert(result);
-        //alert(result);
+
+        if(p_id != 0) set_cover_buttons(p_id, base_url);
+
         // update Comic List based on the Edit Comic criteria that was submitted
         if(comic_id == 0) {
           $('#comic_id').val(c_id); // update with insert_id
@@ -197,6 +199,32 @@ $('button#editpages').click(function() {
   if(comic_id != 0) window.location.href=base_url + "comic/admin/" + comic_id;
 });
 
+$(document).on("click", '#del_cover', function(event) {
+  var base_url = "<? echo base_url(); ?>";
+  var page_id = $(this).attr('href');
+
+  // set data for the AJAX post
+  var post_data = {
+    'page_id': page_id,
+    '<?php echo $this->security->get_csrf_token_name(); ?>' : '<?php echo $this->security->get_csrf_hash(); ?>'
+  };
+
+  // ajax post
+  return $.ajax({
+    type: 'POST',
+    url: base_url + "comic/delPage",
+    data: post_data,
+    success: function(result) {
+      if(result == true) {
+        unset_cover_buttons();
+        alert_bar('page deleted', 's');
+      } else {
+        alert_bar('page not deleted', 'w');
+      }
+    }
+  });
+});
+
 $(document).on("click", 'a.del_page_list_item', function(event) {
   var base_url = "<? echo base_url(); ?>";
   var page_id = $(this).attr('href');
@@ -242,9 +270,8 @@ $(document).on("click", 'a.del_comic_list_item', function(event) {
     data: post_data,
     success: function(result) {
       if(result == true) {
-        $(document).ajaxComplete(function() {
-          $(".comic_list_element_"+comic_id).hide();
-        });
+        $(document).ajaxComplete(function() { $(".comic_list_element_"+comic_id).hide(); });
+        if($('#comic_id').val() == comic_id) { $('#clear_editcomic').click(); }
         alert_bar('comic deleted', 's');
       } else {
         alert_bar('comic not deleted', 'w');
@@ -312,9 +339,33 @@ $(document).on("click", 'a.comic_list_item', function(event) {
       $('#inputDescription').val(data.description);
       $('#update_add_comic').html('Update');
       $('#editpages').show();
+
+      if(data.page_id != 0) {
+        //alert(data.page_id);
+        set_cover_buttons(data.page_id, base_url);
+      } else {
+        unset_cover_buttons();
+      }
     }
   });
 
 });
+
+function set_cover_buttons(page_id, base_url) {
+  $('#show_cover').attr('href', page_id);
+  $('#show_cover_link').attr('href', base_url + 'uploads/' + page_id);
+  $('#del_cover').attr('href', page_id);
+  $('#show_cover').show();
+  $('#del_cover').show();
+}
+
+function unset_cover_buttons() {
+  $('#show_cover').hide();
+  $('#del_cover').hide();
+  $('#show_cover').attr('href', '#');
+  $('#show_cover_link').attr('href', '#');
+  $('#del_cover').attr('href', '#');
+
+}
 
 </script>

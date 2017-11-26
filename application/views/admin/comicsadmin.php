@@ -39,8 +39,8 @@
         <div class="panel-heading">
           <strong id="ec_title">Add Comic</strong>
           <div class="pull-right">
-            <button class="btn btn-default btn-xs" id="show_cover">preview cover</button>
-            <button class="btn btn-danger btn-xs" id="del_cover">delete cover</button>
+            <a id="show_cover_link" href="#" target="_blank"><button class="btn btn-default btn-xs" id="show_cover" style="display: none;">preview cover</button></a>
+            <button class="btn btn-danger btn-xs" id="del_cover" style="display: none;">delete cover</button>
           </div>
         </div>
         <div class="panel-body">

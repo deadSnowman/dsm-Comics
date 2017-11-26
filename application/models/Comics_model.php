@@ -100,12 +100,10 @@ class Comics_model extends CI_Model {
       if(isset($page_id)) {
         if(file_exists('uploads/'. $page_id)) unlink('uploads/'. $page_id);
       }
-      /*$sql_files = "SELECT page_id FROM pages WHERE comic_id = ?";
-      $dbResult_files = $this->db->query($sql_files, array($comic_id));
-      foreach ($dbResult_files->result_array() as $row) {
-        if(isset($row['page_id'])) unlink('uploads/'. $row['page_id']);
-      }*/
-      //unlink("uploads/84"); //works
+
+      // delete cover link
+      $sql2 = "UPDATE comics SET page_id = 0 WHERE page_id = ?";
+      $dbResult2 = $this->db->query($sql2, array($page_id));
 
       return $dbResult;
     } else {

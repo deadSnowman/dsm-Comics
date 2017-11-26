@@ -28,21 +28,19 @@ post_max_size = 14M
 ```
 
 Set the encryption_key in application/config/config.php
+
 `$config['encryption_key'] = 'somethingelse';`
 
 If you're using Linux, open /etc/apache2/apache2.conf and change to
 `AllowOverride All`
 
 then enable apache mod rewrite
-
 `sudo a2enmod rewrite`
 
 and restart Apache
-
 `sudo service apache2 restart`
 
 Also, set permissions for uploads directory to 777
-
 `sudo chmod -R 777 uploads`
 
 ## License

@@ -258,6 +258,7 @@ class Comic extends CI_Controller {
 
         // send back db response to ajax success
         $return_arr['comic_id'] = $comic_id;
+        $return_arr['page_id'] = $page_id;
         echo json_encode($return_arr);
         //echo $comic_id;
 
