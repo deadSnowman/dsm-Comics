@@ -97,7 +97,9 @@ class Comics_model extends CI_Model {
       $dbResult = $this->db->query($sql, array($page_id));
 
       // delete associated page (in filesystem)
-      if(isset($page_id)) unlink('uploads/'. $page_id);
+      if(isset($page_id)) {
+        if(file_exists('uploads/'. $page_id)) unlink('uploads/'. $page_id);
+      }
       /*$sql_files = "SELECT page_id FROM pages WHERE comic_id = ?";
       $dbResult_files = $this->db->query($sql_files, array($comic_id));
       foreach ($dbResult_files->result_array() as $row) {

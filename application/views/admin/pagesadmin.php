@@ -20,10 +20,10 @@
           foreach ($pages as $p) {
             ?>
             <p class="page_list_element_<? echo $p['page_id']; ?>">
-              <a href="<? echo $p['page_id']; ?>" onclick="return false;" class="del_page_list_item">
+              <a href="<? echo $p['page_id']; ?>" onclick="return false;" class="del_page_list_item trash">
                 <span class="glyphicon glyphicon-trash"></span>
               </a>&nbsp;&nbsp;&nbsp;
-              <a href="<? echo $p['page_id']; ?>" onclick="return false;" class="page_list_item"><? echo $p['filename']; ?></a>
+              <a href="<? echo site_url('uploads/' . $p['page_id']) ?>" target="_blank" class="page_list_item"><? echo $p['filename']; ?></a>
             </p>
             <?
           }
@@ -43,7 +43,6 @@
             <input type="hidden" name="comic_id" id="comic_id" value="<? echo $comic_id; ?>">
             <div class="form-group">
               <input class="col-sm-12" type="file" id="inputPages" name="inputPages[]" multiple size="20">
-              <!--<input class="col-sm-10" type="file" multiple name="inputCover[]" id="inputCover">-->
             </div>
             <!--<button type="button" class="btn btn-default" id="clear_editcomic">Clear</button>-->
             <div class="form-group pull-right">

@@ -109,8 +109,9 @@ class Comic extends CI_Controller {
       //upload an image options
       $config['file_name']            = $page_id;
       $config['upload_path']          = './uploads/';
-      $config['allowed_types']        = 'gif|jpg|png';
+      $config['allowed_types']        = 'gif|jpg|png|jpeg';
       $config['overwrite']            = TRUE;
+      //$config['max_size'] = '500000000000000';
 
       return $config;
   }
@@ -155,6 +156,9 @@ class Comic extends CI_Controller {
         if (!$this->upload->do_upload('inputPages')) {
           $error = array('error' => $this->upload->display_errors());
           //echo json_encode($error);
+          $return_arr['alert_bar'] = $error;
+          $return_arr['status'] = "w";
+          $isdeleted = $this->comics_model->delPage($page_id);
         }
         else {
           // upload file, and take out the file extension
@@ -216,7 +220,7 @@ class Comic extends CI_Controller {
           if($_FILES['inputCover']['size'] != 0) {
             $config['file_name']            = $page_id;
             $config['upload_path']          = './uploads/';
-            $config['allowed_types']        = 'gif|jpg|png';
+            $config['allowed_types']        = 'gif|jpg|png|jpeg';
             $config['overwrite']            = TRUE;
 
             $this->load->library('upload', $config);

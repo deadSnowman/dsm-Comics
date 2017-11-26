@@ -22,7 +22,7 @@
           foreach ($comics as $c) {
             ?>
             <p class="comic_list_element_<? echo $c['comic_id']; ?>">
-              <a href="<? echo $c['comic_id']; ?>" onclick="return false;" class="del_comic_list_item">
+              <a href="<? echo $c['comic_id']; ?>" onclick="return false;" class="del_comic_list_item trash">
                 <span class="glyphicon glyphicon-trash"></span>
               </a>&nbsp;&nbsp;&nbsp;
               <a href="<? echo $c['comic_id']; ?>" onclick="return false;" class="comic_list_item"><? echo $c['title']; ?><? if($c['genre'] != "") echo " (".$c['genre'].")"; ?><? if($c['artist'] != "") echo " ~".$c['artist']; ?></a>
@@ -38,14 +38,19 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <strong id="ec_title">Add Comic</strong>
+          <div class="pull-right">
+            <button class="btn btn-default btn-xs" id="show_cover">preview cover</button>
+            <button class="btn btn-danger btn-xs" id="del_cover">delete cover</button>
+          </div>
         </div>
         <div class="panel-body">
 
+          <!--form-horizontal-->
           <form class="form-horizontal" id="editComicForm" enctype="multipart/form-data">
             <input type="hidden" name="comic_id" id="comic_id" value="0">
             <div class="form-group">
               <label for="inputCover" class="col-sm-2 control-label">Cover</label>
-              <input class="col-sm-10" type="file" name="inputCover" id="inputCover">
+              <input class="col-sm-6" type="file" name="inputCover" id="inputCover">
               <!--<input class="col-sm-10" type="file" multiple name="inputCover[]" id="inputCover">-->
             </div>
             <div class="form-group">

@@ -4,6 +4,16 @@ body {
   padding-bottom: 20px;
 }
 
+
+.trash {
+  color: #d9534f;
+  text-decoration: none;
+}
+.trash:hover {
+  color: #c9302c;
+  text-decoration: none;
+}
+
 /* using a blue-heading in a panel without the blue border */
 .blue-heading {
   background-color: #337ab7!important

@@ -9,7 +9,9 @@
 <!-- for draggable ui -->
 <script>
 $( function() {
-  $( "#sortable" ).sortable();
+  $( "#sortable" ).sortable({
+    cursor: "grabbing"
+  });
   $( "#sortable" ).disableSelection();
 } );
 </script>
@@ -54,18 +56,24 @@ $('#editPagesForm').on('submit', function(e){
     success: function(result) {
       //alert(result);
       var data = JSON.parse(result);
-      var key = 0;
-      data['added_page_ids'].forEach(function(page_id) {
-        //alert(page_id);
-        $('.pages_list').append('<p class="page_list_element_' + page_id + '">'+
-        '<a href="' + page_id + '" onclick="return false;" class="del_page_list_item"><span class="glyphicon glyphicon-trash"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' +
-        '<a href="' + page_id + '" onclick="return false;" class="page_list_item">' + data['ofiles']['inputPages']['name'][key] + '</a>'
-        );
-        key = key + 1;
-      });
 
-      alert_bar('pages added', 's');
-      pin_pages_layout(false); // click pin button, but don't show the notification
+      if(data['status'] == "w") {
+        alert_bar(JSON.stringify(data['alert_bar']), 'w');
+      } else {
+        var key = 0;
+        data['added_page_ids'].forEach(function(page_id) {
+          //alert(page_id);
+          $('.pages_list').append('<p class="page_list_element_' + page_id + '">'+
+          '<a href="' + page_id + '" onclick="return false;" class="del_page_list_item trash"><span class="glyphicon glyphicon-trash"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' +
+          /*'<a href="' + page_id + '" onclick="return false;" class="page_list_item">' + data['ofiles']['inputPages']['name'][key] + '</a>'*/
+          '<a href="' + base_url + '/uploads/' + page_id + '" target="_blank" class="page_list_item">' + data['ofiles']['inputPages']['name'][key] + '</a>'
+          );
+          key = key + 1;
+        });
+
+        alert_bar('pages added', 's');
+        pin_pages_layout(false); // click pin button, but don't show the notification
+      }
     }
   });
 });
@@ -111,7 +119,7 @@ $('#editComicForm').on('submit', function(e){
 
           var append_str = "";
           append_str += "<p class=\"comic_list_element_" + c_id + "\">"+
-          "<a href=\"" + c_id + "\" onclick=\"return false;\" class=\"del_comic_list_item\"><span class=\"glyphicon glyphicon-trash\"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+          "<a href=\"" + c_id + "\" onclick=\"return false;\" class=\"del_comic_list_item trash\"><span class=\"glyphicon glyphicon-trash\"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
           "<a href=\"" + c_id + "\" onclick=\"return false;\" class=\"comic_list_item\">" + title;
           if(genre != "") append_str += " (" + genre + ")";
           if(artist != "") append_str += " ~" + artist;
@@ -125,7 +133,7 @@ $('#editComicForm').on('submit', function(e){
 
           var swap_str = "";
           swap_str += "<p class=\"comic_list_element_" + comic_id + "\">"+
-          "<a href=\"" + comic_id + "\" onclick=\"return false;\" class=\"del_comic_list_item\"><span class=\"glyphicon glyphicon-trash\"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+          "<a href=\"" + comic_id + "\" onclick=\"return false;\" class=\"del_comic_list_item trash\"><span class=\"glyphicon glyphicon-trash\"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
           "<a href=\"" + comic_id + "\" onclick=\"return false;\" class=\"comic_list_item\">" + title;
           if(genre != "") swap_str += " (" + genre + ")";
           if(artist != "") swap_str += " ~" + artist;
@@ -149,7 +157,9 @@ function pin_pages_layout(alert_option) {
   };
 
   $('.page_list_item').each(function() {
-    post_data['page_display_order'].push($(this).attr('href'));
+    //post_data['page_display_order'].push($(this).attr('href'));
+    var url = $(this).attr('href');
+    post_data['page_display_order'].push(url.substr(url.lastIndexOf("/")+1));
   });
 
   // ajax post
