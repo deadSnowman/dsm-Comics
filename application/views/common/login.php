@@ -27,7 +27,7 @@
               </div>
               <div class="form-group">
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" name="password" id="password" placeholder="password">
+                  <input type="password" class="form-control" name="password" id="password" placeholder="password">
                   <span class="text-danger"><? echo form_error('password'); ?></span>
                 </div>
               </div>

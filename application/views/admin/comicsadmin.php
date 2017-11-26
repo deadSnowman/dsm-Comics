@@ -74,9 +74,11 @@
             </div>
             <button type="button" class="btn btn-default" id="clear_editcomic">Clear</button>
             <div class="form-group pull-right">
-              <div class="col-sm-offset-2 col-sm-10">
-                <button type="button" name="editpages" id="editpages" class="btn btn-default" style="display: none;">Edit Pages</button>
-                <button type="submit" class="btn btn-primary" id="update_add_comic" value="upload">Add</button>
+              <div class="col-sm-12">
+                <div class="pull-right">
+                  <button type="button" name="editpages" id="editpages" class="btn btn-default" style="display: none;">Edit Pages</button>
+                  <button type="submit" class="btn btn-primary" id="update_add_comic" value="upload">Add</button>
+                </div>
               </div>
             </div>
             <div class="clearfix"></div>
