@@ -1,7 +1,7 @@
   <div class="container">
-    <h1><? if($comic_title != "") echo $comic_title; ?></h1>
-
     <? if(isset($pages[0]['page_id'])) { ?>
+    <h1 class="text-center"><? if($comic_title != "") echo $comic_title; ?></h1><br/>
+    
 
     <div class="row">
       <div class="col-sm-6 col-sm-offset-3">
@@ -21,12 +21,11 @@
     <div class="row">
       <div class="col-sm-6 col-sm-offset-3">
         <div class="panel panel-default">
-          <!--<p>Image content</p>-->
-          <? echo "<img style=\"display: block; margin: 0 auto; max-width:100%;\" id=\"comic_page\" src=\"" . site_url('uploads/' . $pages[0]['page_id']) . "\" />"; ?>
+          <!-- could also be max-width -->
+          <? echo "<img style=\"display: block; margin: 0 auto; width:100%;\" id=\"comic_page\" src=\"" . site_url('uploads/' . $pages[0]['page_id']) . "\" />"; ?>
         </div>
       </div>
     </div>
-
 
 
     <div class="row">
@@ -45,15 +44,15 @@
           </div>
         </form>
       </div>
-      <br/>
+      <!--<br/>
       <br/>
       <div class="col-sm-6 col-sm-offset-3">
         <?
-        foreach ($pages as $key => $p) {
+        /*foreach ($pages as $key => $p) {
           echo "<p>" . $p['page_id'] . " - " . $p['filename'] . "</p>";
-        }
+        }*/
         ?>
-      </div>
+      </div>-->
     </div>
     <? } else { ?>
       <br/><br/><br/>
