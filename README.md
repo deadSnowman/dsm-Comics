@@ -1,6 +1,7 @@
 # dsm-Comics
 A PHP and AJAX webcomic page built with CodeIgniter (under development)
 
+[Screens](#screens)
 
 ## To-Do (this list will grow)
 - clean up comics home and pages views
@@ -13,8 +14,6 @@ A PHP and AJAX webcomic page built with CodeIgniter (under development)
 
 ## Getting Started
 Just a small database setup and a few config modifications are needed
-
-[Screens](#screens)
 
 ### Setup
 Open and modify application/config/database.php after running the database script supplied in "dbdump" to match your database setup
