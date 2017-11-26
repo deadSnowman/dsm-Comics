@@ -79,7 +79,7 @@ class Comics_model extends CI_Model {
           $dbResult = $this->db->query($sql, array($title, $genre, $artist, $description, $comic_id));
           return $comic_id;
         } else {
-          print_r("here: " . $page_id);
+          //print_r("here: " . $page_id);
           $sql = "UPDATE comics SET title = ?, genre = ?, artist = ?, description = ?, page_id = ?  WHERE comic_id = ?";
           $dbResult = $this->db->query($sql, array($title, $genre, $artist, $description, $page_id, $comic_id));
           return $comic_id;

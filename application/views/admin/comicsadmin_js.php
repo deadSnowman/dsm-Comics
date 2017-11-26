@@ -90,6 +90,7 @@ $('#editComicForm').on('submit', function(e){
     cache: false,
     processData: false,
     success: function(result) {
+      //alert(result);
       var res = JSON.parse(result);
       var status = res['status'];
       //var status = JSON.parse(result)['status'];
@@ -125,9 +126,9 @@ $('#editComicForm').on('submit', function(e){
           swap_str += "<p class=\"comic_list_element_" + comic_id + "\">"+
           "<a href=\"" + comic_id + "\" onclick=\"return false;\" class=\"del_comic_list_item\"><span class=\"glyphicon glyphicon-trash\"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
           "<a href=\"" + comic_id + "\" onclick=\"return false;\" class=\"comic_list_item\">" + title;
-          if(genre != "") append_str += " (" + genre + ")";
-          if(artist != "") append_str += " ~" + artist;
-          append_str += "</a></p>";
+          if(genre != "") swap_str += " (" + genre + ")";
+          if(artist != "") swap_str += " ~" + artist;
+          swap_str += "</a></p>";
           $('p.comic_list_element_' + comic_id).html(swap_str);
 
           alert_bar('comic updated', 's');
