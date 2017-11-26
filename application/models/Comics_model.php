@@ -27,15 +27,23 @@ class Comics_model extends CI_Model {
     }
   }
 
-  // used in comic_view
-  public function getPages($comic_id=0) {
-    if($comic_id != 0) {
-      $sql = "SELECT comics.*, comics.page_id, filename FROM comics INNER JOIN pages ON comics.page_id = pages.page_id WHERE comics.comic_id = ? AND cover = 0";
+  // used in comic_view and pages admin
+  public function getPages($comic_id=0, $cover=0) {
+    if($cover == 0) { // get all non cover pages for pages admin
+      $sql = "SELECT * FROM pages WHERE comic_id = ? AND cover=0";
       $dbResult = $this->db->query($sql, array($comic_id));
       $result = $dbResult->result_array();
       return $result;
     } else {
-      return false;
+      // this is probably broken.  fix it for comic_view
+      /*if($comic_id != 0) {
+        $sql = "SELECT comics.*, comics.page_id, filename FROM comics INNER JOIN pages ON comics.page_id = pages.page_id WHERE comics.comic_id = ? AND cover = 0";
+        $dbResult = $this->db->query($sql, array($comic_id));
+        $result = $dbResult->result_array();
+        return $result;
+      } else {
+        return false;
+      }*/
     }
   }
 
@@ -82,7 +90,28 @@ class Comics_model extends CI_Model {
     }
   }
 
-  public function delComic($comic_id=0){
+  public function delPage($page_id=0) {
+    if($this->session->userdata('username') != "") {
+      // delete comic
+      $sql = "DELETE FROM pages WHERE page_id = ?";
+      $dbResult = $this->db->query($sql, array($page_id));
+
+      // delete associated page (in filesystem)
+      if(isset($page_id)) unlink('uploads/'. $page_id);
+      /*$sql_files = "SELECT page_id FROM pages WHERE comic_id = ?";
+      $dbResult_files = $this->db->query($sql_files, array($comic_id));
+      foreach ($dbResult_files->result_array() as $row) {
+        if(isset($row['page_id'])) unlink('uploads/'. $row['page_id']);
+      }*/
+      //unlink("uploads/84"); //works
+
+      return $dbResult;
+    } else {
+      redirect(base_url() . 'login');
+    }
+  }
+
+  public function delComic($comic_id=0) {
     if($this->session->userdata('username') != "") {
       // delete comic
       $sql = "DELETE FROM comics WHERE comic_id = ?";

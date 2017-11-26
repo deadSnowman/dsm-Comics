@@ -37,6 +37,38 @@ $('#clear_editcomic').click(function() {
 });
 
 
+$('#editPagesForm').on('submit', function(e){
+  e.preventDefault();
+
+  var base_url = "<? echo base_url(); ?>";
+  var comic_id = $('#comic_id').val();
+
+  // ajax post
+  return $.ajax({
+    type: 'POST',
+    url: base_url + "comic/updateAddPages",
+    data: new FormData(this),
+    contentType: false,
+    cache: false,
+    processData: false,
+    success: function(result) {
+      //alert(result);
+      var data = JSON.parse(result);
+      var key = 0;
+      data['added_page_ids'].forEach(function(page_id) {
+        //alert(page_id);
+        $('.pages_list').append('<p class="page_list_element_' + page_id + '">'+
+        '<a href="' + page_id + '" onclick="return false;" class="del_page_list_item"><span class="glyphicon glyphicon-trash"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' +
+        '<a href="' + page_id + '" onclick="return false;" class="page_list_item">' + data['ofiles']['inputPages']['name'][key] + '</a>'
+        );
+        key = key + 1;
+      });
+
+      alert_bar('pages added', 's');
+    }
+  });
+});
+
 $('#editComicForm').on('submit', function(e){
   e.preventDefault();
 
@@ -83,9 +115,7 @@ $('#editComicForm').on('submit', function(e){
 });
 
 function pin_comic_layout(alert_option) {
-
   var base_url = "<? echo base_url(); ?>";
-
   var post_data = {
     'comic_display_order': [],
     '<?php echo $this->security->get_csrf_token_name(); ?>' : '<?php echo $this->security->get_csrf_hash(); ?>'
@@ -109,6 +139,34 @@ $('button#editpages').click(function() {
   var base_url = "<? echo base_url(); ?>";
   var comic_id = $('#comic_id').val();
   if(comic_id != 0) window.location.href=base_url + "comic/admin/" + comic_id;
+});
+
+$(document).on("click", 'a.del_page_list_item', function(event) {
+  var base_url = "<? echo base_url(); ?>";
+  var page_id = $(this).attr('href');
+
+  // set data for the AJAX post
+  var post_data = {
+    'page_id': page_id,
+    '<?php echo $this->security->get_csrf_token_name(); ?>' : '<?php echo $this->security->get_csrf_hash(); ?>'
+  };
+
+  // ajax post
+  return $.ajax({
+    type: 'POST',
+    url: base_url + "comic/delPage",
+    data: post_data,
+    success: function(result) {
+      if(result == true) {
+        $(document).ajaxComplete(function() {
+          $(".page_list_element_"+page_id).hide();
+        });
+        alert_bar('page deleted', 's');
+      } else {
+        alert_bar('page not deleted', 'w');
+      }
+    }
+  });
 });
 
 $(document).on("click", 'a.del_comic_list_item', function(event) {

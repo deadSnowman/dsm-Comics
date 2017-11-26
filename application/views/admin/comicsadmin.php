@@ -1,9 +1,5 @@
 <div class="container">
 
-  <!--<div class="fl_container">
-    <div id="alertarea">
-    </div>
-  </div>-->
   <div class="fl_container">
     <div id="alertarea">
     </div>
@@ -41,7 +37,7 @@
     <div class="col-sm-5">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <strong>Add Comic</strong>
+          <strong id="ec_title">Add Comic</strong>
         </div>
         <div class="panel-body">
 

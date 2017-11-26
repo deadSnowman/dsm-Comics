@@ -1,15 +1,32 @@
-<div class="container content">
+<div class="container">
 
-  <div class="row">
+  <div class="fl_container">
+    <div id="alertarea">
+    </div>
+  </div>
+
+  <!--<h1>Pages Admin</h1>-->
+
+  <div class="row content">
     <div class="col-sm-7">
       <div class="panel panel-default">
         <div class="panel-heading">
           <strong>Pages List</strong>
+          <button class="btn btn-primary btn-xs pull-right" id="pin_pages_list"><span class="glyphicon glyphicon-pushpin"></span></button>
         </div>
         <div class="panel-body">
-          <div class="pages_list">
+          <div class="pages_list clearfix" id="sortable">
           <?
-          print "<p>pages in here</p>";
+          foreach ($pages as $p) {
+            ?>
+            <p class="page_list_element_<? echo $p['page_id']; ?>">
+              <a href="<? echo $p['page_id']; ?>" onclick="return false;" class="del_page_list_item">
+                <span class="glyphicon glyphicon-trash"></span>
+              </a>&nbsp;&nbsp;&nbsp;
+              <a href="<? echo $p['page_id']; ?>" onclick="return false;" class="page_list_item"><? echo $p['filename']; ?></a>
+            </p>
+            <?
+          }
           ?>
           </div>
         </div>
@@ -18,15 +35,15 @@
     <div class="col-sm-5">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <strong>Add Page</strong>
+          <strong id="ep_title">Add Page(s)</strong>
         </div>
         <div class="panel-body">
 
-          <form class="form-horizontal" id="editComicForm" enctype="multipart/form-data">
-            <input type="hidden" name="comic_id" id="comic_id" value="0">
+          <form class="form-horizontal" id="editPagesForm" enctype="multipart/form-data">
+            <input type="hidden" name="comic_id" id="comic_id" value="<? echo $comic_id; ?>">
             <div class="form-group">
-              <label for="inputPages" class="col-sm-2 control-label">Pages</label>
-              <input class="col-sm-10" type="file" id="inputPages" name="inputPages[]" multiple size="20">
+
+              <input class="col-sm-12" type="file" id="inputPages" name="inputPages[]" multiple size="20">
               <!--<input class="col-sm-10" type="file" multiple name="inputCover[]" id="inputCover">-->
             </div>
             <!--<button type="button" class="btn btn-default" id="clear_editcomic">Clear</button>-->
@@ -36,6 +53,7 @@
               </div>
             </div>
             <div class="clearfix"></div>
+            <input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
           </form>
 
         </div>

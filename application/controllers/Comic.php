@@ -29,20 +29,19 @@ class Comic extends CI_Controller {
 
   public function admin($comic_id=0) {
     if($this->session->userdata('username') != "") {
-      //echo '<h2>Welcome - '.$this->session->userdata('username').'</h2>';
-      //echo '<a href="'.base_url().'login/logout">Logout</a>';
       // load models
       $this->load->model('comics_model');
+
+      // security data
+      $data['csrf'] = array(
+        'name' => $this->security->get_csrf_token_name(),
+        'hash' => $this->security->get_csrf_hash()
+      );
 
       if($comic_id === 0) {
         // get data
         $data['comics'] = $this->comics_model->getComics();
         $data['page'] = "admin";
-
-        $data['csrf'] = array(
-          'name' => $this->security->get_csrf_token_name(),
-          'hash' => $this->security->get_csrf_hash()
-        );
 
         // load views
         $this->load->view('common/header');
@@ -54,6 +53,9 @@ class Comic extends CI_Controller {
         $this->load->view('common/footer');
       } else {
         // get data
+        $data['pages'] = $this->comics_model->getPages($comic_id, 0); // get covers
+        //$data['comic_title'] = json_decode($this->comics_model->getComicByID($comic_id), true)['title'];
+        $data['comic_id'] = $comic_id;
         $data['page'] = "admin";
 
         // load views
@@ -68,8 +70,6 @@ class Comic extends CI_Controller {
     } else {
       redirect(base_url() . 'login');
     }
-
-
   }
 
   public function comic_view($comic_id=0) {
@@ -77,7 +77,7 @@ class Comic extends CI_Controller {
     $this->load->model('comics_model');
 
     // get data
-    $data['pages'] = $this->comics_model->getPages($comic_id);
+    $data['pages'] = $this->comics_model->getPages($comic_id, 0); // get non covers?
     $data['comic_title'] = json_decode($this->comics_model->getComicByID($comic_id), true)['title'];
     $data['page'] = "comic_view";
 
@@ -101,6 +101,79 @@ class Comic extends CI_Controller {
 
     // send back json to ajax success
     echo $selected_comic;
+  }
+
+  private function set_upload_options($page_id) {
+      //upload an image options
+      $config['file_name']            = $page_id;
+      $config['upload_path']          = './uploads/';
+      $config['allowed_types']        = 'gif|jpg|png';
+      $config['overwrite']            = TRUE;
+
+      return $config;
+  }
+
+  public function updateAddPages() {
+    if($this->session->userdata('username') != "") {
+      // load models
+      $this->load->model('comics_model'); // also contains page stuff
+      $this->load->model('filemgmt_model'); // for writing to filesystem
+
+      // get post data
+      $comic_id = (INT) $this->input->post('comic_id');
+
+      // make return array
+      $return_arr['added_page_ids'] = array();
+      //$added_page_ids = array();
+
+      $return_arr['ofiles'] = $_FILES; //$ofiles = $_FILES;
+      $files = $_FILES;
+      $cpt = count($_FILES['inputPages']['name']);
+      for($i=0; $i<$cpt; $i++) {
+        $_FILES['inputPages']['name']= $files['inputPages']['name'][$i];
+        $_FILES['inputPages']['type']= $files['inputPages']['type'][$i];
+        $_FILES['inputPages']['tmp_name']= $files['inputPages']['tmp_name'][$i];
+        $_FILES['inputPages']['error']= $files['inputPages']['error'][$i];
+        $_FILES['inputPages']['size']= $files['inputPages']['size'][$i];
+
+        // db first
+        $page_id = 0;
+        if(isset($_FILES['inputPages']['name'])) {
+          if($_FILES['inputPages']['name'] != "") {
+            $fname = $_FILES['inputPages']['name'];
+            $page_id = $this->filemgmt_model->storePage($comic_id, 0, $fname, 0, 0);
+          }
+        }
+
+        $config = $this->set_upload_options($page_id);
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+
+        // then write pages to fs
+        if (!$this->upload->do_upload('inputPages')) {
+          $error = array('error' => $this->upload->display_errors());
+          //echo json_encode($error);
+        }
+        else {
+          // upload file, and take out the file extension
+          $data = array('upload_data' => $this->upload->data()); //echo json_encode($data);
+          $img_data= $data['upload_data'];
+          $new_imgname=$page_id;
+          $new_imgpath=$img_data['file_path'].$new_imgname;
+          rename($img_data['full_path'], $new_imgpath);
+          //array_push($added_page_ids, $page_id
+          array_push($return_arr['added_page_ids'], $page_id);
+        }
+      }
+
+      // return to ajax success (returns an array of page_id's, and also the json representation of the posted files)
+      //echo json_encode($ofiles['inputPages']); //json_encode($added_page_ids);
+      echo json_encode($return_arr);
+      //echo json_encode($_FILES); // dbug: look at what files were sent - alert this in success function before html appending and replacing
+
+    } else {
+      redirect(base_url() . 'login');
+    }
   }
 
   public function updateAddComic() {
@@ -170,6 +243,24 @@ class Comic extends CI_Controller {
     echo $comic_id;
   }
 
+  public function delPage() {
+    if($this->session->userdata('username') != "") {
+      // load models
+      $this->load->model('comics_model');
+
+      // get post data
+      $page_id = (INT) $this->input->post('page_id');
+
+      // run delete
+      $isdeleted = $this->comics_model->delPage($page_id);
+
+      // send back db response to ajax success
+      echo $isdeleted;
+    } else {
+      redirect(base_url() . 'login');
+    }
+  }
+
   public function delComic() {
     if($this->session->userdata('username') != "") {
       // load models
@@ -204,6 +295,5 @@ class Comic extends CI_Controller {
     } else {
       redirect(base_url() . 'login');
     }
-
   }
 }
