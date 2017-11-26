@@ -9,10 +9,6 @@
 <!-- comic view specific code -->
 <script type="text/javascript">
 
-$(document).ready(function () {
-  //alert("test");
-});
-
 $('#next, #next2, #next3').click(() => { next_page(); });
 $('#prev, #prev2').click(() => { prev_page(); });
 $('#first, #first2').click(() => { first(); });
@@ -42,9 +38,8 @@ function prev_page() {
 
   if(page_num >= 0) {
     $('#page_num').val(page_num);
-    var page_id_list = $('#page_id_list').val(); //retrieve array
+    var page_id_list = $('#page_id_list').val();
     page_id_list_parsed = JSON.parse(page_id_list);
-    //alert(page_num + " - " + page_id_list_parsed[page_num] +" - " + page_id_list); // debug
     $('#comic_page').attr("src", base_url + "uploads/" + page_id_list_parsed[page_num]);
   }
 }
@@ -52,14 +47,14 @@ function prev_page() {
 function first() {
   var base_url = "<? echo base_url(); ?>";
   $('#page_num').val(0);
-  var page_id_list = $('#page_id_list').val(); //retrieve array
+  var page_id_list = $('#page_id_list').val();
   page_id_list_parsed = JSON.parse(page_id_list);
   $('#comic_page').attr("src", base_url + "uploads/" + page_id_list_parsed[0]);
 }
 
 function last() {
   var base_url = "<? echo base_url(); ?>";
-  var page_id_list = $('#page_id_list').val(); //retrieve array
+  var page_id_list = $('#page_id_list').val();
   page_id_list_parsed = JSON.parse(page_id_list);
   $('#page_num').val(page_id_list_parsed.length-1);
   $('#comic_page').attr("src", base_url + "uploads/" + page_id_list_parsed[page_id_list_parsed.length-1]);
@@ -68,16 +63,20 @@ function last() {
 function rand() {
   var base_url = "<? echo base_url(); ?>";
   var page_num = parseInt($('#page_num').val());
-  var page_id_list = $('#page_id_list').val(); //retrieve array
+  var page_id_list = $('#page_id_list').val();
   page_id_list_parsed = JSON.parse(page_id_list);
-  // don't pick the same page
-  var flag = true; var randnum = "";
-  while(flag) {
-    var randnum = Math.floor(Math.random()*page_id_list_parsed.length);
-    if(randnum != page_num) flag = false;
+
+  // don't continually generate random numbers that aren't the same page if there's only one page
+  if(page_id_list_parsed.length > 1) {
+    // don't pick the same page
+    var flag = true; var randnum = "";
+    while(flag) {
+      var randnum = Math.floor(Math.random()*page_id_list_parsed.length);
+      if(randnum != page_num) flag = false;
+    }
+    $('#page_num').val(randnum);
+    $('#comic_page').attr("src", base_url + "uploads/" + page_id_list_parsed[randnum]);
   }
-  $('#page_num').val(randnum);
-  $('#comic_page').attr("src", base_url + "uploads/" + page_id_list_parsed[randnum]);
 }
 
 </script>
