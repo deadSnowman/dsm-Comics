@@ -13,7 +13,7 @@ $(document).ready(function () {
   //alert("test");
 });
 
-$('#next, #next2').click(() => { next_page(); });
+$('#next, #next2, #next3').click(() => { next_page(); });
 $('#prev, #prev2').click(() => { prev_page(); });
 $('#first, #first2').click(() => { first(); });
 $('#last, #last2').click(() => { last(); });
