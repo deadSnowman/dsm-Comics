@@ -42,7 +42,6 @@
           <form class="form-horizontal" id="editPagesForm" enctype="multipart/form-data">
             <input type="hidden" name="comic_id" id="comic_id" value="<? echo $comic_id; ?>">
             <div class="form-group">
-
               <input class="col-sm-12" type="file" id="inputPages" name="inputPages[]" multiple size="20">
               <!--<input class="col-sm-10" type="file" multiple name="inputCover[]" id="inputCover">-->
             </div>

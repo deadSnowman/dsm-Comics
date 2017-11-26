@@ -34,11 +34,3 @@
 .shake:hover:after {content:" 凸ಠ益ಠ)凸"}
 
 </style>
-
-<script type="text/javascript">
-
-function swapadmintext(text) {
-  //text.html('凸ಠ益ಠ)凸');
-}
-
-</script>

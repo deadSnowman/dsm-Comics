@@ -2,15 +2,14 @@
 A PHP and AJAX webcomic page built with CodeIgniter (under development)
 
 ## To-Do (this list will grow)
-- comics home and pages views
+- clean up comics home and pages views
 - archive view
-- admin login / admin page security
-- page and cover image upload
-- users admin, comics admin, and pages admin
-- add a modal delete prompt for comics
-- add delete file button in admin page
-- prevent comics without a title from being stored
-- do something about squished cover images
+- admin: add titles to pages
+- admin: add a modal delete prompt for comics
+- admin: hover / click page in pages admin shows comic
+- admin: prevent comics without a title from being stored
+- home: do something about squished cover images
+- comic view: comic download button?
 
 ## Getting Started
 Just a small database setup and a few config modifications are needed

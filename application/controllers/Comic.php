@@ -86,6 +86,8 @@ class Comic extends CI_Controller {
     $this->load->view('common/openbody');
     $this->load->view('common/nav', $data);
     $this->load->view('comic/comic_view', $data);
+    $this->load->view('comic/comic_view_js.php');
+    $this->load->view('common/closebody');
     $this->load->view('common/footer');
   }
 
