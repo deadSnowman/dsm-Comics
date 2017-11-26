@@ -1,6 +1,8 @@
 # dsm-Comics
 A PHP and AJAX webcomic page built with CodeIgniter (under development)
 
+[Screens](#screens)
+
 ## To-Do (this list will grow)
 - clean up comics home and pages views
 - archive view - make some url scheme that loads the specific file in the comic view and tie it to the archives
@@ -39,6 +41,12 @@ and restart Apache
 
 Also, set permissions for uploads directory to 777
 `sudo chmod -R 777 uploads`
+
+## Screens
+[![dsm-Comics video](https://i.imgur.com/CZ2lOgO.png)](http://www.youtube.com/watch_popup?v=DYF4OVfUcmQ)
+[![dsm-Comics video](https://i.imgur.com/mq7lT1z.png)](http://www.youtube.com/watch_popup?v=DYF4OVfUcmQ)
+[![dsm-Comics video](https://i.imgur.com/4RJGCs8.png)](http://www.youtube.com/watch_popup?v=DYF4OVfUcmQ)
+[![dsm-Comics video](https://i.imgur.com/qlUKlwL.png)](http://www.youtube.com/watch_popup?v=DYF4OVfUcmQ)
 
 ## License
 This project is licensed under the MIT License - see the [license.txt](license.txt) file for details
