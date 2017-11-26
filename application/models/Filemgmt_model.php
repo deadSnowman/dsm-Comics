@@ -19,9 +19,13 @@ class Filemgmt_model extends CI_Model {
         }
       } else {
         // update image instead
-        $sql1 = "SELECT comics.*, comics.page_id, filename FROM comics LEFT JOIN pages ON comics.page_id = pages.page_id WHERE comics.comic_id = ?";
-        $dbResult1 = $this->db->query($sql1, array($comic_id));
-        $page_id = $dbResult1->row()->page_id;
+        if($cover === 0) { // don't do join lookup nonsens if you're not changing the cover.  You won't be updating at all
+          $page_id = 0;
+        } else {
+          $sql1 = "SELECT comics.*, comics.page_id, filename FROM comics LEFT JOIN pages ON comics.page_id = pages.page_id WHERE comics.comic_id = ?";
+          $dbResult1 = $this->db->query($sql1, array($comic_id));
+          $page_id = $dbResult1->row()->page_id;
+        }
 
         // if there is no data in the pages table, add the image data
         if($page_id == 0) { // === doesn't work.  There's some type juggling going on with the db return

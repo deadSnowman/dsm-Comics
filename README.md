@@ -10,7 +10,6 @@ A PHP and AJAX webcomic page built with CodeIgniter (under development)
 - admin: hover / click page in pages admin shows comic
 - home: do something about squished cover images
 - comic view: comic download button?
-- bug: page uploads start over writing things (cover showed up)
 
 ## Getting Started
 Just a small database setup and a few config modifications are needed

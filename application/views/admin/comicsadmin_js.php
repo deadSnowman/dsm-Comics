@@ -65,6 +65,7 @@ $('#editPagesForm').on('submit', function(e){
       });
 
       alert_bar('pages added', 's');
+      pin_pages_layout(false); // click pin button, but don't show the notification
     }
   });
 });
