@@ -30,12 +30,12 @@ class Comics_model extends CI_Model {
   // used in comic_view and pages admin
   public function getPages($comic_id=0, $cover=0) {
     if($cover == 0) { // get all non cover pages for pages admin
-      $sql = "SELECT * FROM pages WHERE comic_id = ? AND cover=0";
+      $sql = "SELECT * FROM pages WHERE comic_id = ? AND cover=0 ORDER BY page_display_order";
       $dbResult = $this->db->query($sql, array($comic_id));
       $result = $dbResult->result_array();
       return $result;
     } else {
-      // this is probably broken.  fix it for comic_view
+      // this is probably broken or not used.  fix it or remove it for comic_view
       /*if($comic_id != 0) {
         $sql = "SELECT comics.*, comics.page_id, filename FROM comics INNER JOIN pages ON comics.page_id = pages.page_id WHERE comics.comic_id = ? AND cover = 0";
         $dbResult = $this->db->query($sql, array($comic_id));
@@ -133,6 +133,18 @@ class Comics_model extends CI_Model {
       $dbResult3 = $this->db->query($sql3, array($comic_id));
 
       return $dbResult;
+    } else {
+      redirect(base_url() . 'login');
+    }
+  }
+
+  public function pinPages($display_order_arr) {
+    if($this->session->userdata('username') != "") {
+      foreach ($display_order_arr as $key => $value) {
+        $sql = "UPDATE pages SET page_display_order = ?  WHERE page_id = ?";
+        $dbResult = $this->db->query($sql, array($key, $value));
+      }
+      return true; // this always succeeds, yup yup
     } else {
       redirect(base_url() . 'login');
     }

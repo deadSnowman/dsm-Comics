@@ -279,6 +279,24 @@ class Comic extends CI_Controller {
     }
   }
 
+  public function pinPages() {
+    if($this->session->userdata('username') != "") {
+      // load models
+      $this->load->model('comics_model');
+
+      // get post data
+      $display_order_arr = $this->input->post('page_display_order');
+
+      // store new display order
+      $result = $this->comics_model->pinPages($display_order_arr);
+
+      // send back (t/f) to ajax success
+      echo $result;
+    } else {
+      redirect(base_url() . 'login');
+    }
+  }
+
   public function pinComics() {
     if($this->session->userdata('username') != "") {
       // load models

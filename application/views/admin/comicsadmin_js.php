@@ -114,6 +114,26 @@ $('#editComicForm').on('submit', function(e){
   });
 });
 
+function pin_pages_layout(alert_option) {
+  var base_url = "<? echo base_url(); ?>";
+  var post_data = {
+    'page_display_order': [],
+    '<?php echo $this->security->get_csrf_token_name(); ?>' : '<?php echo $this->security->get_csrf_hash(); ?>'
+  };
+
+  $('.page_list_item').each(function() {
+    post_data['page_display_order'].push($(this).attr('href'));
+  });
+
+  // ajax post
+  return $.ajax({
+    type: 'POST',
+    url: base_url + "comic/pinPages",
+    data: post_data,
+    success: function(result) { if(alert_option == true) result == true ? alert_bar('layout pinned', 's') : alert_bar('layout not pinned', 'w'); }
+  });
+}
+
 function pin_comic_layout(alert_option) {
   var base_url = "<? echo base_url(); ?>";
   var post_data = {
@@ -132,7 +152,6 @@ function pin_comic_layout(alert_option) {
     data: post_data,
     success: function(result) { if(alert_option == true) result == true ? alert_bar('layout pinned', 's') : alert_bar('layout not pinned', 'w'); }
   });
-
 }
 
 $('button#editpages').click(function() {
@@ -195,6 +214,10 @@ $(document).on("click", 'a.del_comic_list_item', function(event) {
       }
     }
   });
+});
+
+$('#pin_pages_list').click(function() {
+  pin_pages_layout(true);
 });
 
 $('#pin_comic_list').click(function() {
