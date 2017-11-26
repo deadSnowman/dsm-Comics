@@ -191,58 +191,74 @@ class Comic extends CI_Controller {
       $artist = $this->input->post('inputArtist');
       $description = $this->input->post('inputDescription');
 
-      // write page info to db
-      $page_id = 0;
-      if(isset($_FILES['inputCover']['name'])) {
-        if($_FILES['inputCover']['name'] != "") {
-          $fname = $_FILES['inputCover']['name'];
-          $page_id = $this->filemgmt_model->storePage($comic_id, 0, $fname, 1, 0);
-        }
-      }
+      $return_arr['alert_bar'] = "";
+      if($title == "") {
+        $return_arr['status'] = "w";
+        $return_arr['alert_bar'] = "Please add a title";
+        echo json_encode($return_arr);
+        //echo $return_arr;
+      } else {
 
-      // write page to filesystem
-      if(isset($_FILES['inputCover']['name'])) { // reachces when posting empy file data anyway
-        if($_FILES['inputCover']['size'] != 0) {
-          $config['file_name']            = $page_id;
-          $config['upload_path']          = './uploads/';
-          $config['allowed_types']        = 'gif|jpg|png';
-          $config['overwrite']            = TRUE;
+        $return_arr['status'] = "s";
+        $return_arr['alert_bar'] = "Comic added";
 
-          $this->load->library('upload', $config);
-          $this->upload->initialize($config);
-
-          if (!$this->upload->do_upload('inputCover')) {
-            $error = array('error' => $this->upload->display_errors());
-            //echo json_encode($error);
+        // write page info to db
+        $page_id = 0;
+        if(isset($_FILES['inputCover']['name'])) {
+          if($_FILES['inputCover']['name'] != "") {
+            $fname = $_FILES['inputCover']['name'];
+            $page_id = $this->filemgmt_model->storePage($comic_id, 0, $fname, 1, 0);
           }
-          else {
-            // upload file, and take out the file extension
-            $data = array('upload_data' => $this->upload->data()); //echo json_encode($data);
-            $img_data= $data['upload_data'];
-            $new_imgname=$page_id;
-            $new_imgpath=$img_data['file_path'].$new_imgname;
-            rename($img_data['full_path'], $new_imgpath);
+        }
+
+        // write page to filesystem
+        if(isset($_FILES['inputCover']['name'])) { // reachces when posting empy file data anyway
+          if($_FILES['inputCover']['size'] != 0) {
+            $config['file_name']            = $page_id;
+            $config['upload_path']          = './uploads/';
+            $config['allowed_types']        = 'gif|jpg|png';
+            $config['overwrite']            = TRUE;
+
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+
+            if (!$this->upload->do_upload('inputCover')) {
+              $error = array('error' => $this->upload->display_errors());
+              //echo json_encode($error);
+            }
+            else {
+              // upload file, and take out the file extension
+              $data = array('upload_data' => $this->upload->data()); //echo json_encode($data);
+              $img_data= $data['upload_data'];
+              $new_imgname=$page_id;
+              $new_imgpath=$img_data['file_path'].$new_imgname;
+              rename($img_data['full_path'], $new_imgpath);
+            }
+          } else {
+            //echo "nope";
           }
         } else {
-          //echo "nope";
+          redirect(base_url() . 'login');
         }
-      } else {
-        redirect(base_url() . 'login');
+
+
+        // add comic info to db
+        $comic_id = $this->comics_model->updateAddComic($comic_id, $title, $genre, $artist, $description, $page_id);
+
+        // add the comic_id to the pages table if a file was posted
+        if(isset($_FILES['inputCover']['name'])) {
+          if($_FILES['inputCover']['name'] != "") {
+            $this->filemgmt_model->updateComicIDForPage($page_id, $comic_id);
+          }
+        }
+
+        // send back db response to ajax success
+        $return_arr['comic_id'] = $comic_id;
+        echo json_encode($return_arr);
+        //echo $comic_id;
+
       }
     }
-
-    // add comic info to db
-    $comic_id = $this->comics_model->updateAddComic($comic_id, $title, $genre, $artist, $description, $page_id);
-
-    // add the comic_id to the pages table if a file was posted
-    if(isset($_FILES['inputCover']['name'])) {
-      if($_FILES['inputCover']['name'] != "") {
-        $this->filemgmt_model->updateComicIDForPage($page_id, $comic_id);
-      }
-    }
-
-    // send back db response to ajax success
-    echo $comic_id;
   }
 
   public function delPage() {

@@ -90,26 +90,51 @@ $('#editComicForm').on('submit', function(e){
     cache: false,
     processData: false,
     success: function(result) {
-      //alert(result);
-      // update Comic List based on the Edit Comic criteria that was submitted
-      if(comic_id == 0) {
-        $('#comic_id').val(result); // update with insert_id
-        $('#ec_title').html("Edit Comic - " + result); // update with insert_id
-        $('.comic_list').append("<p class=\"comic_list_element_" + result + "\">"+
-        "<a href=\"" + result + "\" onclick=\"return false;\" class=\"del_comic_list_item\"><span class=\"glyphicon glyphicon-trash\"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
-        "<a href=\"" + result + "\" onclick=\"return false;\" class=\"comic_list_item\">" + title + " (" + genre + ") ~" + artist + "</a></p>");
-        $('#update_add_comic').html('Update');
-        $('#editpages').show();
+      var res = JSON.parse(result);
+      var status = res['status'];
+      //var status = JSON.parse(result)['status'];
 
-        alert_bar('comic added', 's');
+      //var mess = JSON.parse(result)['alert_bar'];
+      //alert(status);
+      if(status === "w") {
+        alert_bar(res['alert_bar'], 'w');
       } else {
-        $('p.comic_list_element_' + comic_id).html("<p class=\"comic_list_element_" + comic_id + "\">"+
-        "<a href=\"" + comic_id + "\" onclick=\"return false;\" class=\"del_comic_list_item\"><span class=\"glyphicon glyphicon-trash\"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
-        "<a href=\"" + comic_id + "\" onclick=\"return false;\" class=\"comic_list_item\">" + title + " (" + genre + ") ~" + artist + "</a></p>");
-        alert_bar('comic updated', 's');
-      }
+        var c_id = res['comic_id'];
+        //alert(result);
+        //alert(result);
+        // update Comic List based on the Edit Comic criteria that was submitted
+        if(comic_id == 0) {
+          $('#comic_id').val(c_id); // update with insert_id
+          $('#ec_title').html("Edit Comic - " + c_id); // update with insert_id
 
-      pin_comic_layout(false); // click pin button, but don't show the notification
+          var append_str = "";
+          append_str += "<p class=\"comic_list_element_" + c_id + "\">"+
+          "<a href=\"" + c_id + "\" onclick=\"return false;\" class=\"del_comic_list_item\"><span class=\"glyphicon glyphicon-trash\"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+          "<a href=\"" + c_id + "\" onclick=\"return false;\" class=\"comic_list_item\">" + title;
+          if(genre != "") append_str += " (" + genre + ")";
+          if(artist != "") append_str += " ~" + artist;
+          append_str += "</a></p>";
+          $('.comic_list').append(append_str);
+          $('#update_add_comic').html('Update');
+          $('#editpages').show();
+
+          alert_bar('comic added', 's');
+        } else {
+
+          var swap_str = "";
+          swap_str += "<p class=\"comic_list_element_" + comic_id + "\">"+
+          "<a href=\"" + comic_id + "\" onclick=\"return false;\" class=\"del_comic_list_item\"><span class=\"glyphicon glyphicon-trash\"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+          "<a href=\"" + comic_id + "\" onclick=\"return false;\" class=\"comic_list_item\">" + title;
+          if(genre != "") append_str += " (" + genre + ")";
+          if(artist != "") append_str += " ~" + artist;
+          append_str += "</a></p>";
+          $('p.comic_list_element_' + comic_id).html(swap_str);
+
+          alert_bar('comic updated', 's');
+        }
+
+        pin_comic_layout(false); // click pin button, but don't show the notification
+      }
     }
   });
 });

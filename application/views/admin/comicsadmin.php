@@ -25,7 +25,7 @@
               <a href="<? echo $c['comic_id']; ?>" onclick="return false;" class="del_comic_list_item">
                 <span class="glyphicon glyphicon-trash"></span>
               </a>&nbsp;&nbsp;&nbsp;
-              <a href="<? echo $c['comic_id']; ?>" onclick="return false;" class="comic_list_item"><? echo $c['title']; ?> (<? echo $c['genre']; ?>)  ~<? echo $c['artist']; ?></a>
+              <a href="<? echo $c['comic_id']; ?>" onclick="return false;" class="comic_list_item"><? echo $c['title']; ?><? if($c['genre'] != "") echo " (".$c['genre'].")"; ?><? if($c['artist'] != "") echo " ~".$c['artist']; ?></a>
             </p>
             <?
           }

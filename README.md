@@ -7,7 +7,6 @@ A PHP and AJAX webcomic page built with CodeIgniter (under development)
 - admin: add titles to pages
 - admin: add a modal delete prompt for comics
 - admin: hover / click page in pages admin shows comic
-- admin: prevent comics without a title from being stored
 - home: do something about squished cover images
 - comic view: comic download button?
 
