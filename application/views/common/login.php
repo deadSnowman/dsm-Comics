@@ -1,14 +1,4 @@
-<style type="text/css">
-.vertical-center {
-  min-height: 50%;
-  min-height: 50vh;
-  display: flex;
-  align-items: center;
-}
-/*text-center*/
-</style>
-
-<div class="vertical-center">
+<div class="content">
   <div class="container">
     <div class="row">
       <div class="col-sm-6 col-sm-offset-3">
