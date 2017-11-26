@@ -4,9 +4,6 @@
     <div id="alertarea">
     </div>
   </div>
-
-  <!--<h1>Pages Admin</h1>-->
-
   <div class="row content">
     <div class="col-sm-7">
       <div class="panel panel-default">
@@ -38,13 +35,11 @@
           <strong id="ep_title">Add Page(s)</strong>
         </div>
         <div class="panel-body">
-
           <form class="form-horizontal" id="editPagesForm" enctype="multipart/form-data">
             <input type="hidden" name="comic_id" id="comic_id" value="<? echo $comic_id; ?>">
             <div class="form-group">
               <input class="col-sm-12" type="file" id="inputPages" name="inputPages[]" multiple size="20">
             </div>
-            <!--<button type="button" class="btn btn-default" id="clear_editcomic">Clear</button>-->
             <div class="form-group pull-right">
               <div class="col-sm-offset-2 col-sm-10 pull-right">
                 <button type="submit" class="btn btn-primary pull-right" id="update_add_page" value="upload">Add</button>

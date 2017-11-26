@@ -5,8 +5,6 @@
     </div>
   </div>
 
-  <!--<h1>Comic Admin</h1>-->
-
   <div class="row content">
     <div class="col-sm-7">
       <div class="panel panel-default">
@@ -15,8 +13,6 @@
           <button class="btn btn-primary btn-xs pull-right" id="pin_comic_list"><span class="glyphicon glyphicon-pushpin"></span></button>
         </div>
         <div class="panel-body">
-
-
           <div class="comic_list clearfix" id="sortable">
           <?
           foreach ($comics as $c) {
@@ -77,7 +73,7 @@
                 <textarea class="form-control" rows="5" name="inputDescription" id="inputDescription" placeholder="lorem ipsum and whatnot..."></textarea>
               </div>
             </div>
-            <button type="button" class="btn btn-default" id="clear_editcomic">Clear</button>
+            <button type="button" class="btn btn-default" id="clear_editcomic" style="display: none;">Back</button>
             <div class="form-group pull-right">
               <div class="col-sm-12">
                 <div class="pull-right">

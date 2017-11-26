@@ -34,6 +34,7 @@ $('#clear_editcomic').click(function() {
   $('#inputDescription').val("");
   $('#update_add_comic').html('Add');
   $('#editpages').hide();
+  $('#clear_editcomic').hide();
   unset_cover_buttons();
 
   return false;
@@ -111,7 +112,8 @@ $('#editComicForm').on('submit', function(e){
         var c_id = res['comic_id'];
         var p_id = res['page_id'];
         //alert(result);
-
+        
+        $('#clear_editcomic').show();
         if(p_id != 0) set_cover_buttons(p_id, base_url);
 
         // update Comic List based on the Edit Comic criteria that was submitted
@@ -339,6 +341,7 @@ $(document).on("click", 'a.comic_list_item', function(event) {
       $('#inputDescription').val(data.description);
       $('#update_add_comic').html('Update');
       $('#editpages').show();
+      $('#clear_editcomic').show();
 
       if(data.page_id != 0) {
         //alert(data.page_id);

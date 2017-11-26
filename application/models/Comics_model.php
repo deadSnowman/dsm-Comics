@@ -9,7 +9,6 @@ class Comics_model extends CI_Model {
 
   // used in comic_home
   public function getComics() {
-    //$sql = "SELECT * FROM comics";
     $sql = "SELECT comics.*, comics.page_id, filename FROM comics LEFT JOIN pages ON comics.page_id = pages.page_id ORDER BY comic_display_order";
     $dbResult = $this->db->query($sql);
     $result = $dbResult->result_array();
@@ -34,16 +33,6 @@ class Comics_model extends CI_Model {
       $dbResult = $this->db->query($sql, array($comic_id));
       $result = $dbResult->result_array();
       return $result;
-    } else {
-      // this is probably broken or not used.  fix it or remove it for comic_view
-      /*if($comic_id != 0) {
-        $sql = "SELECT comics.*, comics.page_id, filename FROM comics INNER JOIN pages ON comics.page_id = pages.page_id WHERE comics.comic_id = ? AND cover = 0";
-        $dbResult = $this->db->query($sql, array($comic_id));
-        $result = $dbResult->result_array();
-        return $result;
-      } else {
-        return false;
-      }*/
     }
   }
 
@@ -116,9 +105,6 @@ class Comics_model extends CI_Model {
       // delete comic
       $sql = "DELETE FROM comics WHERE comic_id = ?";
       $dbResult = $this->db->query($sql, array($comic_id));
-
-      // delete associated chapters (I may not end up having the chapters table)
-      // ...
 
       // delete associated pages (in filesystem)
       $sql_files = "SELECT page_id FROM pages WHERE comic_id = ?";

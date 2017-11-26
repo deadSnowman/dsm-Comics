@@ -7,7 +7,6 @@ A PHP and AJAX webcomic page built with CodeIgniter (under development)
 - admin: add titles to pages
 - admin: add a modal delete prompt for comics
 - admin: hover / click page in pages admin shows comic
-- home: do something about squished cover images
 - comic view: comic download button?
 - hande weird filenames like "blah.jpg-100"
 
@@ -27,7 +26,6 @@ post_max_size = 14M
 ```
 
 Set the encryption_key in application/config/config.php
-
 `$config['encryption_key'] = 'somethingelse';`
 
 If you're using Linux, open /etc/apache2/apache2.conf and change to

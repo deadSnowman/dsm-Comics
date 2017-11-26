@@ -127,7 +127,6 @@ class Comic extends CI_Controller {
 
       // make return array
       $return_arr['added_page_ids'] = array();
-      //$added_page_ids = array();
 
       $return_arr['ofiles'] = $_FILES; //$ofiles = $_FILES;
       $files = $_FILES;
@@ -260,8 +259,6 @@ class Comic extends CI_Controller {
         $return_arr['comic_id'] = $comic_id;
         $return_arr['page_id'] = $page_id;
         echo json_encode($return_arr);
-        //echo $comic_id;
-
       }
     }
   }
