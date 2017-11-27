@@ -51,24 +51,16 @@ h2 span.spacer {
              <?}?>
              <? //if($c['page_id'] == 0) { ?>
              <div class="panel-body">
-                <? //echo "<p><a href=\"" . site_url('comic/' . $c['comic_id']) ."\">" . implode(", ", $c) . "</a></p>"; ?>
-
                 <?
-
                 $print_str = "<p>";
-
                 if($c['page_id'] == 0) $print_str .= "<a href=\"" . site_url('comic/' . $c['comic_id']) ."\">";
-
                 if($c['title'] != "") $print_str .= "<b>Title:</b> " . $c['title'];
                 if($c['genre'] != "") $print_str .= "<br/><b>Genre:</b> " . $c['genre'];
                 if($c['artist'] != "") $print_str .= "<br/><b>Artist:</b> " . $c['artist'];
-                if($c['artist'] != "") $print_str .= "<br/><br/><b>Synopsis:</b> " . $c['description'];
-
+                if($c['description'] != "") $print_str .= "<br/><br/><b>Synopsis:</b> " . $c['description'];
                 if($c['page_id'] == 0) $print_str .= "</a>";
                 $print_str .= "</p>";
-
                 echo $print_str;
-
                 ?>
              </div>
              <? //} ?>

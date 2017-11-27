@@ -4,12 +4,11 @@ A PHP and AJAX webcomic page built with CodeIgniter (under development)
 [Screens](#screens)
 
 ## To-Do (this list will grow)
-- clean up comics home and pages views
-- archive view
+- make a better layout for comics home view
 - admin: add titles to pages
-- admin: add a modal delete prompt for comics
-- admin: hover / click page in pages admin shows comic
+- admin: comic page / cover hover?
 - comic view: comic download button?
+- comic view: select page from dropdown / archive view
 - hande weird filenames like "blah.jpg-100"
 
 ## Getting Started

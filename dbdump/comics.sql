@@ -47,7 +47,7 @@ CREATE TABLE `comics` (
   `owner` int(11) DEFAULT NULL,
   `comic_display_order` int(11) DEFAULT NULL,
   PRIMARY KEY (`comic_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=337 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=428 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +66,7 @@ CREATE TABLE `pages` (
   `page_display_order` int(11) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`page_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=189 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1040 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,7 +84,7 @@ CREATE TABLE `users` (
   `password` varchar(45) DEFAULT NULL,
   `role` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -96,4 +96,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-26  0:39:50
+-- Dump completed on 2017-11-26 23:26:52
