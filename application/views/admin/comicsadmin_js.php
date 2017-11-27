@@ -66,7 +66,10 @@ $('#editPagesForm').on('submit', function(e){
         data['added_page_ids'].forEach(function(page_id) {
           //alert(page_id);
           $('.pages_list').append('<p class="page_list_element_' + page_id + '">'+
-          '<a href="' + page_id + '" onclick="return false;" class="del_page_list_item trash"><span class="glyphicon glyphicon-trash"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' +
+          '<button type="button" class="btn btn-danger btn-xs" id="del_page_list_item" value="' + page_id + '">' +
+            '<span class="glyphicon glyphicon-trash"></span>' +
+          '</button>&nbsp;&nbsp;&nbsp;' +
+          //'<a href="' + page_id + '" onclick="return false;" class="del_page_list_item trash"><span class="glyphicon glyphicon-trash"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' +
           /*'<a href="' + page_id + '" onclick="return false;" class="page_list_item">' + data['ofiles']['inputPages']['name'][key] + '</a>'*/
           '<a href="' + base_url + '/uploads/' + page_id + '" target="_blank" class="page_list_item">' + data['ofiles']['inputPages']['name'][key] + '</a>'
           );
@@ -112,7 +115,7 @@ $('#editComicForm').on('submit', function(e){
         var c_id = res['comic_id'];
         var p_id = res['page_id'];
         //alert(result);
-        
+
         $('#clear_editcomic').show();
         if(p_id != 0) set_cover_buttons(p_id, base_url);
 
@@ -123,7 +126,10 @@ $('#editComicForm').on('submit', function(e){
 
           var append_str = "";
           append_str += "<p class=\"comic_list_element_" + c_id + "\">"+
-          "<a href=\"" + c_id + "\" onclick=\"return false;\" class=\"del_comic_list_item trash\"><span class=\"glyphicon glyphicon-trash\"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+          '<button type="button" class="btn btn-danger btn-xs" id="del_comic_list_item_btn" value="' + c_id + '" data-toggle="modal" data-target="#del_comic_list_item_modal">' +
+            '<span class="glyphicon glyphicon-trash"></span>' +
+          '</button>&nbsp;&nbsp;' +
+          //"<a href=\"" + c_id + "\" onclick=\"return false;\" class=\"del_comic_list_item trash\"><span class=\"glyphicon glyphicon-trash\"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
           "<a href=\"" + c_id + "\" onclick=\"return false;\" class=\"comic_list_item\">" + title;
           if(genre != "") append_str += " (" + genre + ")";
           if(artist != "") append_str += " ~" + artist;
@@ -137,7 +143,10 @@ $('#editComicForm').on('submit', function(e){
 
           var swap_str = "";
           swap_str += "<p class=\"comic_list_element_" + comic_id + "\">"+
-          "<a href=\"" + comic_id + "\" onclick=\"return false;\" class=\"del_comic_list_item trash\"><span class=\"glyphicon glyphicon-trash\"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+          '<button type="button" class="btn btn-danger btn-xs" id="del_comic_list_item_btn" value="' + comic_id + '" data-toggle="modal" data-target="#del_comic_list_item_modal">' +
+            '<span class="glyphicon glyphicon-trash"></span>' +
+          '</button>&nbsp;&nbsp;' +
+          //"<a href=\"" + comic_id + "\" onclick=\"return false;\" class=\"del_comic_list_item trash\"><span class=\"glyphicon glyphicon-trash\"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
           "<a href=\"" + comic_id + "\" onclick=\"return false;\" class=\"comic_list_item\">" + title;
           if(genre != "") swap_str += " (" + genre + ")";
           if(artist != "") swap_str += " ~" + artist;
@@ -227,9 +236,10 @@ $(document).on("click", '#del_cover', function(event) {
   });
 });
 
-$(document).on("click", 'a.del_page_list_item', function(event) {
+$(document).on("click", '#del_page_list_item', function(event) {
   var base_url = "<? echo base_url(); ?>";
-  var page_id = $(this).attr('href');
+  //var page_id = $(this).attr('href');
+  page_id = $(this).val();
 
   // set data for the AJAX post
   var post_data = {
@@ -255,9 +265,17 @@ $(document).on("click", 'a.del_page_list_item', function(event) {
   });
 });
 
-$(document).on("click", 'a.del_comic_list_item', function(event) {
+// pass comic_id to actual delete button in modal
+$(document).on("click", '#del_comic_list_item_btn', function(event) {
+  comic_id = $(this).val();
+  $('#del_comic_list_item').val(comic_id);
+});
+
+//$(document).on("click", 'a.del_comic_list_item', function(event) {
+$(document).on("click", '#del_comic_list_item', function(event) {
   var base_url = "<? echo base_url(); ?>";
-  var comic_id = $(this).attr('href');
+  //var comic_id = $(this).attr('href');
+  var comic_id = $(this).val();
 
   // set data for the AJAX post
   var post_data = {
@@ -359,12 +377,12 @@ function set_cover_buttons(page_id, base_url) {
   $('#show_cover_link').attr('href', base_url + 'uploads/' + page_id);
   $('#del_cover').attr('href', page_id);
   $('#show_cover').show();
-  $('#del_cover').show();
+  $('#del_cover_btn').show();
 }
 
 function unset_cover_buttons() {
   $('#show_cover').hide();
-  $('#del_cover').hide();
+  $('#del_cover_btn').hide();
   $('#show_cover').attr('href', '#');
   $('#show_cover_link').attr('href', '#');
   $('#del_cover').attr('href', '#');

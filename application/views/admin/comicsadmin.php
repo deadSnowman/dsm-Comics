@@ -6,6 +6,44 @@
   </div>
 
   <div class="row content">
+
+    <div class="modal fade" id="del_cover_modal" tabindex="-1" role="dialog" aria-labelledby="del_cover_modal" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Delete Cover</h4>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to delete the cover image?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger" id="del_cover" data-dismiss="modal">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="del_comic_list_item_modal" tabindex="-1" role="dialog" aria-labelledby="del_comic_list_item_modal" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel2">Delete Comic</h4>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to delete this comic?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger" id="del_comic_list_item" value="" data-dismiss="modal">Delete</button>
+            <!--<a href="<? //echo $c['comic_id']; ?>" onclick="return false;" class="del_comic_list_item trash">-->
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="col-sm-7">
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -18,9 +56,9 @@
           foreach ($comics as $c) {
             ?>
             <p class="comic_list_element_<? echo $c['comic_id']; ?>">
-              <a href="<? echo $c['comic_id']; ?>" onclick="return false;" class="del_comic_list_item trash">
+              <button type="button" class="btn btn-danger btn-xs" id="del_comic_list_item_btn" value="<? echo $c['comic_id']; ?>" data-toggle="modal" data-target="#del_comic_list_item_modal">
                 <span class="glyphicon glyphicon-trash"></span>
-              </a>&nbsp;&nbsp;&nbsp;
+              </button>&nbsp;&nbsp;
               <a href="<? echo $c['comic_id']; ?>" onclick="return false;" class="comic_list_item"><? echo $c['title']; ?><? if($c['genre'] != "") echo " (".$c['genre'].")"; ?><? if($c['artist'] != "") echo " ~".$c['artist']; ?></a>
             </p>
             <?
@@ -36,7 +74,8 @@
           <strong id="ec_title">Add Comic</strong>
           <div class="pull-right">
             <a id="show_cover_link" href="#" target="_blank"><button class="btn btn-default btn-xs" id="show_cover" style="display: none;">preview cover</button></a>
-            <button class="btn btn-danger btn-xs" id="del_cover" style="display: none;">delete cover</button>
+            <!--<button class="btn btn-danger btn-xs" id="del_cover" style="display: none;">delete cover</button>-->
+            <button class="btn btn-danger btn-xs" id="del_cover_btn" data-toggle="modal" data-target="#del_cover_modal" style="display: none;">delete cover</button>
           </div>
         </div>
         <div class="panel-body">

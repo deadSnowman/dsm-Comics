@@ -22,7 +22,7 @@
       <div class="col-sm-6 col-sm-offset-3">
         <div class="panel panel-default">
           <!-- could also be max-width -->
-          <? echo "<a href=\"#\" name=\"next\" id=\"next3\"><img style=\"display: block; margin: 0 auto; width:100%;\" id=\"comic_page\" src=\"" . site_url('uploads/' . $pages[$page_num]['page_id']) . "\" /></a>"; ?>
+          <? echo "<a name=\"next\" id=\"next3\"><img style=\"display: block; margin: 0 auto; width:100%; cursor:pointer;\" id=\"comic_page\" src=\"" . site_url('uploads/' . $pages[$page_num]['page_id']) . "\" /></a>"; ?>
         </div>
       </div>
     </div>
