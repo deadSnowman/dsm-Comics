@@ -20,9 +20,6 @@
               <button type="button" class="btn btn-danger btn-xs" id="del_page_list_item" value="<? echo $p['page_id']; ?>">
                 <span class="glyphicon glyphicon-trash"></span>
               </button>&nbsp;&nbsp;
-              <!--<a href="<? //echo $p['page_id']; ?>" onclick="return false;" class="del_page_list_item trash">
-                <span class="glyphicon glyphicon-trash"></span>
-              </a>&nbsp;&nbsp;&nbsp;-->
               <a href="<? echo site_url('uploads/' . $p['page_id']) ?>" target="_blank" class="page_list_item"><? echo $p['filename']; ?></a>
             </p>
             <?

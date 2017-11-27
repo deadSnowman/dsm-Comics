@@ -38,7 +38,6 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-danger" id="del_comic_list_item" value="" data-dismiss="modal">Delete</button>
-            <!--<a href="<? //echo $c['comic_id']; ?>" onclick="return false;" class="del_comic_list_item trash">-->
           </div>
         </div>
       </div>
@@ -74,19 +73,16 @@
           <strong id="ec_title">Add Comic</strong>
           <div class="pull-right">
             <a id="show_cover_link" href="#" target="_blank"><button class="btn btn-default btn-xs" id="show_cover" style="display: none;">preview cover</button></a>
-            <!--<button class="btn btn-danger btn-xs" id="del_cover" style="display: none;">delete cover</button>-->
             <button class="btn btn-danger btn-xs" id="del_cover_btn" data-toggle="modal" data-target="#del_cover_modal" style="display: none;">delete cover</button>
           </div>
         </div>
         <div class="panel-body">
 
-          <!--form-horizontal-->
           <form class="form-horizontal" id="editComicForm" enctype="multipart/form-data">
             <input type="hidden" name="comic_id" id="comic_id" value="0">
             <div class="form-group">
               <label for="inputCover" class="col-sm-2 control-label">Cover</label>
               <input class="col-sm-6" type="file" name="inputCover" id="inputCover">
-              <!--<input class="col-sm-10" type="file" multiple name="inputCover[]" id="inputCover">-->
             </div>
             <div class="form-group">
               <label for="inputTitle" class="col-sm-2 control-label">Title</label>

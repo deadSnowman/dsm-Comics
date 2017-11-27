@@ -128,8 +128,7 @@ $('#editComicForm').on('submit', function(e){
           append_str += "<p class=\"comic_list_element_" + c_id + "\">"+
           '<button type="button" class="btn btn-danger btn-xs" id="del_comic_list_item_btn" value="' + c_id + '" data-toggle="modal" data-target="#del_comic_list_item_modal">' +
             '<span class="glyphicon glyphicon-trash"></span>' +
-          '</button>&nbsp;&nbsp;' +
-          //"<a href=\"" + c_id + "\" onclick=\"return false;\" class=\"del_comic_list_item trash\"><span class=\"glyphicon glyphicon-trash\"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+          '</button>&nbsp;&nbsp;&nbsp;' +
           "<a href=\"" + c_id + "\" onclick=\"return false;\" class=\"comic_list_item\">" + title;
           if(genre != "") append_str += " (" + genre + ")";
           if(artist != "") append_str += " ~" + artist;
@@ -145,8 +144,7 @@ $('#editComicForm').on('submit', function(e){
           swap_str += "<p class=\"comic_list_element_" + comic_id + "\">"+
           '<button type="button" class="btn btn-danger btn-xs" id="del_comic_list_item_btn" value="' + comic_id + '" data-toggle="modal" data-target="#del_comic_list_item_modal">' +
             '<span class="glyphicon glyphicon-trash"></span>' +
-          '</button>&nbsp;&nbsp;' +
-          //"<a href=\"" + comic_id + "\" onclick=\"return false;\" class=\"del_comic_list_item trash\"><span class=\"glyphicon glyphicon-trash\"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+          '</button>&nbsp;&nbsp;&nbsp;' +
           "<a href=\"" + comic_id + "\" onclick=\"return false;\" class=\"comic_list_item\">" + title;
           if(genre != "") swap_str += " (" + genre + ")";
           if(artist != "") swap_str += " ~" + artist;
