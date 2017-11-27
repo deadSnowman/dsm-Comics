@@ -5,7 +5,7 @@ A PHP and AJAX webcomic page built with CodeIgniter (under development)
 
 ## To-Do (this list will grow)
 - clean up comics home and pages views
-- archive view - make some url scheme that loads the specific file in the comic view and tie it to the archives
+- archive view
 - admin: add titles to pages
 - admin: add a modal delete prompt for comics
 - admin: hover / click page in pages admin shows comic

@@ -27,6 +27,7 @@ function next_page() {
     page_id_list_parsed = JSON.parse(page_id_list);
     //alert(page_num + " - " + page_id_list_parsed[page_num] +" - " + page_id_list); // debug
     $('#comic_page').attr("src", base_url + "uploads/" + page_id_list_parsed[page_num]);
+    window.history.pushState("details", "Title", base_url + 'comic/' + $('#comic_id').val() + '/' + page_num);
   }
 }
 
@@ -41,6 +42,7 @@ function prev_page() {
     var page_id_list = $('#page_id_list').val();
     page_id_list_parsed = JSON.parse(page_id_list);
     $('#comic_page').attr("src", base_url + "uploads/" + page_id_list_parsed[page_num]);
+    window.history.pushState("details", "Title", base_url + 'comic/' + $('#comic_id').val() + '/' + page_num);
   }
 }
 
@@ -50,14 +52,17 @@ function first() {
   var page_id_list = $('#page_id_list').val();
   page_id_list_parsed = JSON.parse(page_id_list);
   $('#comic_page').attr("src", base_url + "uploads/" + page_id_list_parsed[0]);
+  window.history.pushState("details", "Title", base_url + 'comic/' + $('#comic_id').val() + '/' + 0);
 }
 
 function last() {
   var base_url = "<? echo base_url(); ?>";
   var page_id_list = $('#page_id_list').val();
-  page_id_list_parsed = JSON.parse(page_id_list);
-  $('#page_num').val(page_id_list_parsed.length-1);
-  $('#comic_page').attr("src", base_url + "uploads/" + page_id_list_parsed[page_id_list_parsed.length-1]);
+  var page_id_list_parsed = JSON.parse(page_id_list);
+  var lastpage = page_id_list_parsed.length-1;
+  $('#page_num').val(lastpage);
+  $('#comic_page').attr("src", base_url + "uploads/" + page_id_list_parsed[lastpage]);
+  window.history.pushState("details", "Title", base_url + 'comic/' + $('#comic_id').val() + '/' + lastpage);
 }
 
 function rand() {
@@ -76,6 +81,7 @@ function rand() {
     }
     $('#page_num').val(randnum);
     $('#comic_page').attr("src", base_url + "uploads/" + page_id_list_parsed[randnum]);
+    window.history.pushState("details", "Title", base_url + 'comic/' + $('#comic_id').val() + '/' + randnum);
   }
 }
 

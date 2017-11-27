@@ -72,7 +72,7 @@ class Comic extends CI_Controller {
     }
   }
 
-  public function comic_view($comic_id=0) {
+  public function comic_view($comic_id=0, $page_num=0) {
     // load models
     $this->load->model('comics_model');
 
@@ -81,14 +81,20 @@ class Comic extends CI_Controller {
     $data['comic_title'] = json_decode($this->comics_model->getComicByID($comic_id), true)['title'];
     $data['page'] = "comic_view";
 
-    // load views
-    $this->load->view('common/header');
-    $this->load->view('common/openbody');
-    $this->load->view('common/nav', $data);
-    $this->load->view('comic/comic_view', $data);
-    $this->load->view('comic/comic_view_js.php');
-    $this->load->view('common/closebody');
-    $this->load->view('common/footer');
+    $data['page_num'] = $page_num;
+
+    if($data['page_num'] <= sizeof($data['pages'])-1) {
+      // load views
+      $this->load->view('common/header');
+      $this->load->view('common/openbody');
+      $this->load->view('common/nav', $data);
+      $this->load->view('comic/comic_view', $data);
+      $this->load->view('comic/comic_view_js.php');
+      $this->load->view('common/closebody');
+      $this->load->view('common/footer');
+    } else {
+      show_404();
+    }
   }
 
   public function loadEditComic() {
