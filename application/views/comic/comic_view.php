@@ -1,3 +1,30 @@
+<!-- https://www.w3schools.com/howto/howto_css_loader.asp -->
+<style>
+.padthis {
+  padding-bottom: 15px;
+}
+.loader {
+  border: 4px solid #f3f3f3; /* Light grey */
+  border-top: 4px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+  /*float: right;*/
+  margin: 0 auto;
+}
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+
   <div class="container">
     <? if(isset($pages[0]['page_id'])) { ?>
     <h1 class="text-center"><? if($comic_title != "") echo $comic_title; ?></h1><br/>
@@ -20,7 +47,9 @@
 
     <div class="row">
       <div class="col-sm-6 col-sm-offset-3">
-        <div class="panel panel-default">
+        <div class="padthis" id="padthis" style="display: none;">
+        <div class="loader" id="loader" style="display: none;"></div></div>
+        <div class="panel panel-default" id="img_panel">
           <!-- could also be max-width -->
           <? echo "<a name=\"next\" id=\"next3\"><img style=\"display: block; margin: 0 auto; width:100%; cursor:pointer;\" id=\"comic_page\" src=\"" . site_url('uploads/' . $pages[$page_num]['page_id']) . "\" /></a>"; ?>
         </div>

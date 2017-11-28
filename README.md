@@ -1,5 +1,5 @@
 # dsm-Comics
-A PHP and AJAX webcomic page built with CodeIgniter (under development)
+An AJAX/PHP webcomic page built with CodeIgniter (under development)
 
 [Screens](#screens)
 
