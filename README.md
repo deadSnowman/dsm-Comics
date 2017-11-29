@@ -5,6 +5,7 @@ An AJAX/PHP webcomic page built with CodeIgniter (under development)
 
 ## To-Do (this list will grow)
 - make a better layout for comics home view
+- admin: user management
 - admin: add titles to pages
 - admin: comic page / cover hover?
 - comic view: comic download button?

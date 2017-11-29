@@ -13,6 +13,17 @@ $('#first, #first2').click(() => { first(); });
 $('#last, #last2').click(() => { last(); });
 $('#rand, #rand2').click(() => { rand(); });
 
+$(document).keydown((e) => {
+  switch(e.which) {
+    case 37: prev_page();
+    break;
+    case 39: next_page();
+    break;
+    default: return;
+  }
+  e.preventDefault();
+});
+
 function start_loader() {
   $('#loader').show();
   $('#img_panel').hide();
