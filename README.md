@@ -8,6 +8,7 @@ An AJAX/PHP webcomic page built with CodeIgniter (under development)
 - admin: user management
 - admin: add titles to pages
 - admin: comic page / cover hover?
+- comic view: fullscreen image
 - comic view: comic download button?
 - comic view: select page from dropdown / archive view
 - hande weird filenames like "blah.jpg-100"

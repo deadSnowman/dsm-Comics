@@ -50,7 +50,8 @@ class Comics_model extends CI_Model {
       $sql = "SELECT * FROM comics WHERE comic_id = ?";
       $dbResult = $this->db->query($sql, array($comic_id));
       $row = $dbResult->result(); // array
-      return json_encode($row[0]);
+      if(isset($row[0])) return json_encode($row[0]);
+      else return false;
     } else {
       return false;
     }
@@ -112,7 +113,6 @@ class Comics_model extends CI_Model {
       foreach ($dbResult_files->result_array() as $row) {
         if(isset($row['page_id'])) unlink('uploads/'. $row['page_id']);
       }
-      //unlink("uploads/84"); //works
 
       // delete associated pages
       $sql3 = "DELETE FROM pages WHERE comic_id = ?";
@@ -127,8 +127,9 @@ class Comics_model extends CI_Model {
   public function pinPages($display_order_arr) {
     if($this->session->userdata('username') != "") {
       foreach ($display_order_arr as $key => $value) {
-        $sql = "UPDATE pages SET page_display_order = ?  WHERE page_id = ?";
-        $dbResult = $this->db->query($sql, array($key, $value));
+        $this->db->set('page_display_order', $key);
+        $this->db->where('page_id', $value);
+        $this->db->update('pages');
       }
       return true; // this always succeeds, yup yup
     } else {
@@ -139,8 +140,9 @@ class Comics_model extends CI_Model {
   public function pinComics($display_order_arr) {
     if($this->session->userdata('username') != "") {
       foreach ($display_order_arr as $key => $value) {
-        $sql = "UPDATE comics SET comic_display_order = ?  WHERE comic_id = ?";
-        $dbResult = $this->db->query($sql, array($key, $value));
+        $this->db->set('comic_display_order', $key);
+        $this->db->where('comic_id', $value);
+        $this->db->update('comics');
       }
       return true; // this always succeeds, yup yup
     } else {

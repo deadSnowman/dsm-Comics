@@ -50,12 +50,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 
-//$route['home/(:any)'] = 'home/$1';
-//$route['comic/(:any)'] = 'comic/$1';
-//$route['(:any)/(:any)'] = '$1/$2';
-//$route['comic/(:any)'] = 'comic/$1';
-
-//$route['comic/:num'] = 'comic/comic_view/$1';
 $route['comic/(:num)'] = 'comic/comic_view/$1/0';
 $route['comic/(:num)/(:num)'] = 'comic/comic_view/$1/$2';
 

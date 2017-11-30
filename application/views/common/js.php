@@ -8,7 +8,6 @@
 
 <!--https://www.w3schools.com/howto/howto_css_shake_image.asp-->
 <style>
-/* to-do: make this shake effect for non admins */
 /*  凸ಠ益ಠ)凸  */
 .shake:hover {
     /* Start the shake animation and make the animation last for 0.5 seconds */
