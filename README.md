@@ -50,5 +50,5 @@ Also, set permissions for uploads directory to 777
 [![dsm-Comics video](https://i.imgur.com/qlUKlwL.png)](http://www.youtube.com/watch_popup?v=DYF4OVfUcmQ)
 
 ## License
-This project is licensed under the MIT License - see the [license.txt](license.txt) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
